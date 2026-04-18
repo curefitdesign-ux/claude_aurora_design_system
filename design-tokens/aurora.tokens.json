@@ -179,106 +179,126 @@
   },
 
   "cta": {
-    "$description": "CTA system — sourced directly from Figma Aurora App Design System (file jD7tZtVeQCMRlIHN7L8umI, Buttons page). STRICT RULE: interactive buttons use ONLY white + coral (#FF5942) + white-glass. Never yellow, never blue.",
+    "$description": "CTA system — sourced from Figma Aurora App Design System. Node IDs: Primary=3885:28575, Secondary=3885:28583, Tertiary=716:3369, Twins=1016:4406. Text on Primary uses the Aurora gradient (yellow→pink), clipped via CSS background-clip:text.",
+
+    "gradient": {
+      "$value": "linear-gradient(135deg, #FFDB17 0%, #FF3278 100%)",
+      "$description": "King CTA Text • Coloured — Aurora's signature yellow-to-pink gradient. Used as gradient text on Primary standalone, and as gradient bg on Twins right button."
+    },
+    "gradient-alt": {
+      "$value": "linear-gradient(81deg, #FFDB17 0%, #FF3278 100%)",
+      "$description": "Alternate angle (no-icon variant)."
+    },
 
     "shared": {
-      "font-family":     { "$value": "{font.family.primary}" },
-      "font-size":       { "$value": "14px", "$type": "dimension" },
-      "font-weight":     { "$value": 700 },
-      "letter-spacing":  { "$value": "0.5px", "$type": "dimension" },
-      "text-transform":  { "$value": "uppercase" }
+      "font-family":        { "$value": "{font.family.primary}" },
+      "font-size-lg":       { "$value": "14px", "$type": "dimension" },
+      "font-size-sm":       { "$value": "12px", "$type": "dimension" },
+      "font-weight":        { "$value": 700 },
+      "letter-spacing-lg":  { "$value": "0.5px" },
+      "letter-spacing-sm":  { "$value": "0.5px" },
+      "text-transform":     { "$value": "uppercase" }
     },
 
     "primary": {
-      "$description": "Highest-priority action. White container, coral text. Dynamic width 120–335px.",
-      "bg":           { "$value": "#FFFFFF", "$type": "color" },
-      "text":         { "$value": "{color.accent.coral}", "$type": "color" },
-      "border":       { "$value": "transparent", "$type": "color" },
-      "radius":       { "$value": "8px", "$type": "dimension" },
-      "min-width":    { "$value": "120px", "$type": "dimension" },
-      "max-width":    { "$value": "335px", "$type": "dimension" },
-      "height":       { "$value": "44px", "$type": "dimension" },
-      "bg-hover":     { "$value": "#FFF1EE", "$type": "color" },
-      "bg-pressed":   { "$value": "#FFE1DB", "$type": "color" },
-      "shadow":       { "$value": "0 4px 14px rgba(255,89,66,0.22)", "$type": "shadow" },
-      "outline": {
-        "bg":     { "$value": "transparent", "$type": "color" },
-        "text":   { "$value": "{color.accent.coral}", "$type": "color" },
-        "border": { "$value": "#FFFFFF", "$type": "color" }
-      },
+      "$description": "White bg, gradient text (yellow→pink). 50px Big / 40px Small. 27px backdrop-blur even when enabled. Radius 5px. Max-width 335px (Big fixed), hug (Small).",
+      "bg":              { "$value": "#FFFFFF", "$type": "color" },
+      "text-gradient":   { "$value": "{cta.gradient}" },
+      "backdrop-blur":   { "$value": "27px", "$type": "dimension" },
+      "radius":          { "$value": "5px", "$type": "dimension" },
+      "height-lg":       { "$value": "50px", "$type": "dimension" },
+      "height-sm":       { "$value": "40px", "$type": "dimension" },
+      "max-width":       { "$value": "335px", "$type": "dimension" },
+      "padding-x-lg":    { "$value": "20px", "$type": "dimension" },
+      "padding-y-lg":    { "$value": "15px", "$type": "dimension" },
+      "padding-x-sm":    { "$value": "20px", "$type": "dimension" },
+      "padding-y-sm":    { "$value": "10px", "$type": "dimension" },
+      "gap":             { "$value": "5px", "$type": "dimension" },
       "disabled": {
-        "bg":             { "$value": "{color.bg.elevated}", "$type": "color" },
-        "text":           { "$value": "rgba(255,255,255,0.4)", "$type": "color" },
-        "border":         { "$value": "transparent", "$type": "color" },
-        "outline-border": { "$value": "rgba(255,255,255,0.2)", "$type": "color" }
+        "bg":           { "$value": "rgba(255,255,255,0.10)", "$type": "color" },
+        "text":         { "$value": "rgba(255,255,255,0.20)", "$type": "color" },
+        "blur":         { "$value": "30px", "$type": "dimension" },
+        "opacity":      { "$value": 0.20 }
       }
     },
 
     "secondary": {
-      "$description": "SKU / banner buttons. Glass morphism: 20% opacity white + 10px backdrop blur. Can have icons. Rich state variants.",
-      "bg":             { "$value": "rgba(255,255,255,0.20)", "$type": "color" },
-      "backdrop-blur":  { "$value": "10px", "$type": "dimension" },
-      "text":           { "$value": "#FFFFFF", "$type": "color" },
-      "border":         { "$value": "transparent", "$type": "color" },
-      "radius":         { "$value": "8px", "$type": "dimension" },
-      "min-width":      { "$value": "120px", "$type": "dimension" },
-      "height":         { "$value": "40px", "$type": "dimension" },
-      "bg-hover":       { "$value": "rgba(255,255,255,0.28)", "$type": "color" },
-      "bg-pressed":     { "$value": "rgba(255,255,255,0.14)", "$type": "color" },
+      "$description": "Glass: white 10% opacity + 30px backdrop-blur. White text. 40px Big / 30px Small. SKU / banner buttons. Can have leading icon. 7 state variants.",
+      "bg":              { "$value": "rgba(255,255,255,0.10)", "$type": "color" },
+      "backdrop-blur":   { "$value": "30px", "$type": "dimension" },
+      "text":            { "$value": "#FFFFFF", "$type": "color" },
+      "radius":          { "$value": "5px", "$type": "dimension" },
+      "height-lg":       { "$value": "40px", "$type": "dimension" },
+      "height-sm":       { "$value": "30px", "$type": "dimension" },
+      "padding-x-lg":    { "$value": "20px", "$type": "dimension" },
+      "padding-y-lg":    { "$value": "10px", "$type": "dimension" },
+      "padding-x-sm":    { "$value": "15px", "$type": "dimension" },
+      "padding-y-sm":    { "$value": "7px", "$type": "dimension" },
+      "font-size-lg":    { "$value": "14px", "$type": "dimension" },
+      "font-size-sm":    { "$value": "12px", "$type": "dimension" },
       "states": {
-        "active":     { "bg": { "$value": "rgba(255,255,255,0.20)", "$type": "color" } },
-        "disabled":   {
-          "bg":   { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
-          "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+        "disabled": {
+          "bg":   { "$value": "rgba(255,255,255,0.10)", "$type": "color" },
+          "text": { "$value": "rgba(255,255,255,0.20)", "$type": "color" }
         },
-        "booked":     {
-          "bg":   { "$value": "rgba(74,183,74,0.18)", "$type": "color" },
-          "text": { "$value": "{color.status.positive}", "$type": "color" },
-          "icon": { "$value": "checkmark" }
+        "booked": {
+          "$description": "Solid booking confirmed state. Checkmark icon.",
+          "bg":          { "$value": "rgba(15,228,152,0.20)", "$type": "color" },
+          "text":        { "$value": "#FFFFFF", "$type": "color" },
+          "icon-color":  { "$value": "#0FE498", "$type": "color" }
         },
-        "waitlist":   {
-          "$description": "Available with countdown badge",
-          "bg":    { "$value": "rgba(247,199,68,0.18)", "$type": "color" },
-          "text":  { "$value": "{color.accent.gold}", "$type": "color" },
-          "badge": { "$value": "count" }
+        "waitlist": {
+          "$description": "Slots open. Gold ring badge + JOIN WAITLIST sub-label.",
+          "bg":            { "$value": "rgba(255,255,255,0.20)", "$type": "color" },
+          "badge-color":   { "$value": "#F7C744", "$type": "color" },
+          "sub-text":      { "$value": "rgba(255,255,255,0.40)", "$type": "color" }
         },
         "waitlisted": {
-          "bg":    { "$value": "rgba(74,183,74,0.18)", "$type": "color" },
-          "text":  { "$value": "{color.status.positive}", "$type": "color" },
-          "badge": { "$value": "count" }
+          "$description": "User is on waitlist. Green ring badge + WAITLISTED sub-label.",
+          "bg":            { "$value": "rgba(15,228,152,0.20)", "$type": "color" },
+          "badge-color":   { "$value": "#0FE498", "$type": "color" },
+          "sub-text":      { "$value": "rgba(255,255,255,0.40)", "$type": "color" }
         },
         "waitlist-full": {
-          "bg":   { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
-          "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+          "bg":   { "$value": "rgba(255,255,255,0.10)", "$type": "color" },
+          "text": { "$value": "rgba(255,255,255,0.40)", "$type": "color" }
         },
-        "negative":   {
-          "bg":   { "$value": "rgba(176,0,32,0.12)", "$type": "color" },
-          "text": { "$value": "{color.accent.coral}", "$type": "color" }
+        "negative": {
+          "$description": "Destructive / unavailable action. Coral text on coral tint.",
+          "bg":   { "$value": "rgba(255,89,66,0.10)", "$type": "color" },
+          "text": { "$value": "#FF5942", "$type": "color" }
         }
       }
     },
 
     "tertiary": {
-      "$description": "Plain 14px bold ALL CAPS white label. 0.5px letter-spacing. No container.",
+      "$description": "Transparent, white text, 50px backdrop-blur. 14px (Big) / 12px (Small), 700 bold, ALL CAPS, 0.5px tracking. No visible container.",
       "bg":             { "$value": "transparent", "$type": "color" },
       "text":           { "$value": "#FFFFFF", "$type": "color" },
-      "border":         { "$value": "transparent", "$type": "color" },
-      "font-size":      { "$value": "14px", "$type": "dimension" },
-      "font-weight":    { "$value": 700 },
-      "letter-spacing": { "$value": "0.5px", "$type": "dimension" },
-      "padding-x":      { "$value": "12px", "$type": "dimension" },
-      "padding-y":      { "$value": "8px", "$type": "dimension" },
+      "backdrop-blur":  { "$value": "50px", "$type": "dimension" },
+      "radius":         { "$value": "5px", "$type": "dimension" },
+      "height-lg":      { "$value": "40px", "$type": "dimension" },
+      "height-sm":      { "$value": "30px", "$type": "dimension" },
+      "font-size-lg":   { "$value": "14px", "$type": "dimension" },
+      "font-size-sm":   { "$value": "12px", "$type": "dimension" },
+      "letter-spacing": { "$value": "0.5px" },
+      "padding-x-lg":   { "$value": "20px", "$type": "dimension" },
+      "padding-y-lg":   { "$value": "11px", "$type": "dimension" },
+      "padding-x-sm":   { "$value": "15px", "$type": "dimension" },
+      "padding-y-sm":   { "$value": "7px", "$type": "dimension" },
       "disabled": {
-        "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+        "opacity": { "$value": 0.20 }
       }
     },
 
     "twins": {
-      "$description": "Double-CTA row. Pairs two buttons side-by-side at equal width.",
+      "$description": "Double-CTA row. Left=Secondary glass, Right=Primary with gradient bg + white text (inverted). 10px gap, 20px container padding. Heights: 50px or 40px.",
       "gap":        { "$value": "10px", "$type": "dimension" },
-      "min-width":  { "$value": "135px", "$type": "dimension" },
+      "padding-x":  { "$value": "20px", "$type": "dimension" },
       "height-lg":  { "$value": "50px", "$type": "dimension" },
-      "height-sm":  { "$value": "40px", "$type": "dimension" }
+      "height-sm":  { "$value": "40px", "$type": "dimension" },
+      "primary-bg": { "$value": "{cta.gradient-alt}", "$description": "Gradient bg (inverted from standalone Primary which has white bg)" },
+      "primary-text": { "$value": "#FFFFFF", "$type": "color", "$description": "White text on gradient bg (inverted)" }
     }
   },
 

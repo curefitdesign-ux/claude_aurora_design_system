@@ -93,91 +93,110 @@
 
   /* ============================================
      CTA System — sourced from Figma Aurora App Design System
-     (file jD7tZtVeQCMRlIHN7L8umI — Buttons page)
+     (file jD7tZtVeQCMRlIHN7L8umI, node IDs: 3885:28575 Primary,
+      3885:28583 Secondary, 716:3369 Tertiary, 1016:4406 Twins)
 
-     RULE: CTA colors are strictly white + coral (#FF5942) + white-glass.
-     NEVER use curefit-yellow or curefit-blue on an interactive button.
+     GRADIENT:  Primary text (and Twins right button bg) uses the Aurora CTA
+     gradient: yellow (#FFDB17) → pink (#FF3278). This is named "King CTA Text • Coloured"
+     in Figma. Apply via CSS gradient text clip on white bg buttons.
 
      Hierarchy:
-       Primary   — highest priority. White bg, coral text. Solid + outline variants.
-       Secondary — SKU / banner buttons. Glass (20% white + 10px blur), white text.
-                   Rich state variants: booked / waitlist / waitlisted / full / negative.
-       Tertiary  — plain 14px bold ALL CAPS white label. No container.
-       Twins     — double-CTA pattern (50px or 40px height, min-width 135px each).
+       Primary   — white bg, gradient text (yellow→pink). 50px (Big) / 40px (Small).
+       Secondary — glass (white 10% + 30px backdrop-blur), white text. 40px (Big) / 30px (Small).
+                   State variants: active, disabled, booked, waitlist, waitlisted, full, negative.
+       Tertiary  — transparent, white text, 50px backdrop-blur. 40px (Big) / 30px (Small).
+       Twins     — row of two: Secondary (left) + Primary-gradient-bg (right). 50px or 40px.
      ============================================ */
 
+  /* --- Aurora CTA Gradient (yellow → pink) --- */
+  /* "King CTA Text • Coloured" style from Figma */
+  --cta-gradient: linear-gradient(135deg, #FFDB17 0%, #FF3278 100%);
+  --cta-gradient-alt: linear-gradient(81deg, #FFDB17 0%, #FF3278 100%); /* icon-less variant */
+
+  /* --- Shared typography --- */
+  --cta-font-family: var(--font-primary);          /* Inter */
+  --cta-font-weight: 700;
+  --cta-font-size-lg: 14px;                        /* Big variant */
+  --cta-font-size-sm: 12px;                        /* Small variant */
+  --cta-letter-spacing-lg: 0.5px;                  /* 3.571% of 14px */
+  --cta-letter-spacing-sm: 0.5px;                  /* 4.167% of 12px */
+  --cta-text-transform: uppercase;
+
   /* --- Primary CTA --- */
+  /* White bg. Text is the CTA gradient clipped to text (use -webkit-background-clip: text). */
   --cta-primary-bg: #FFFFFF;
-  --cta-primary-text: #FF5942;                    /* coral, not pink */
-  --cta-primary-border: transparent;
-  --cta-primary-radius: 8px;
-  --cta-primary-min-width: 120px;
-  --cta-primary-max-width: 335px;
-  --cta-primary-height: 44px;
-  --cta-primary-bg-hover: #FFF1EE;
-  --cta-primary-bg-pressed: #FFE1DB;
-  --cta-primary-shadow: 0 4px 14px rgba(255, 89, 66, 0.22);
+  --cta-primary-text-gradient: var(--cta-gradient);  /* gradient text, not solid */
+  --cta-primary-backdrop-blur: 27px;               /* figma: 27.18px blur even when enabled */
+  --cta-primary-radius: 5px;                       /* figma: cornerRadius 5px on variants */
+  --cta-primary-height-lg: 50px;                   /* Big=Yes */
+  --cta-primary-height-sm: 40px;                   /* Big=No */
+  --cta-primary-max-width: 335px;                  /* Big=Yes: 335px fixed */
+  --cta-primary-padding-x-lg: 20px;
+  --cta-primary-padding-y-lg: 15px;
+  --cta-primary-padding-x-sm: 20px;
+  --cta-primary-padding-y-sm: 10px;
+  --cta-primary-gap: 5px;                          /* icon + text gap */
+  /* Disabled */
+  --cta-primary-disabled-bg: rgba(255, 255, 255, 0.10);
+  --cta-primary-disabled-text: rgba(255, 255, 255, 0.20);
+  --cta-primary-disabled-blur: 30px;
 
-  /* Primary — outline variant */
-  --cta-primary-outline-bg: transparent;
-  --cta-primary-outline-text: #FF5942;
-  --cta-primary-outline-border: #FFFFFF;
-
-  /* Primary — disabled */
-  --cta-primary-disabled-bg: #2C2C2C;             /* color-bg-elevated */
-  --cta-primary-disabled-text: rgba(255, 255, 255, 0.4);
-  --cta-primary-disabled-border: transparent;
-  --cta-primary-disabled-outline-border: rgba(255, 255, 255, 0.2);
-
-  /* --- Secondary CTA (glass) --- */
-  --cta-secondary-bg: rgba(255, 255, 255, 0.20);  /* 20% opacity white */
-  --cta-secondary-backdrop-blur: 10px;            /* figma: 10px blur */
+  /* --- Secondary CTA (glass/frosted) --- */
+  /* 10% white + 30px backdrop-blur. SKU/Banner buttons. */
+  --cta-secondary-bg: rgba(255, 255, 255, 0.10);   /* 10% white — confirmed from Figma */
+  --cta-secondary-backdrop-blur: 30px;             /* Medium Blur: 30px */
   --cta-secondary-text: #FFFFFF;
-  --cta-secondary-border: transparent;
-  --cta-secondary-radius: 8px;
-  --cta-secondary-min-width: 120px;
-  --cta-secondary-height: 40px;
-  --cta-secondary-bg-hover: rgba(255, 255, 255, 0.28);
-  --cta-secondary-bg-pressed: rgba(255, 255, 255, 0.14);
+  --cta-secondary-radius: 5px;
+  --cta-secondary-height-lg: 40px;                 /* Big=Yes */
+  --cta-secondary-height-sm: 30px;                 /* Big=No */
+  --cta-secondary-padding-x-lg: 20px;
+  --cta-secondary-padding-y-lg: 10px;
+  --cta-secondary-padding-x-sm: 15px;
+  --cta-secondary-padding-y-sm: 7px;
+  --cta-secondary-font-size-lg: 14px;
+  --cta-secondary-font-size-sm: 12px;
+  /* States */
+  --cta-secondary-disabled-bg: rgba(255, 255, 255, 0.10);
+  --cta-secondary-disabled-text: rgba(255, 255, 255, 0.20);
+  --cta-secondary-booked-bg: rgba(15, 228, 152, 0.20);      /* curefit-green @ 20% */
+  --cta-secondary-booked-text: #FFFFFF;
+  --cta-secondary-booked-icon: #0FE498;                      /* checkmark color */
+  --cta-secondary-waitlist-bg: rgba(255, 255, 255, 0.20);   /* 20% when slots available */
+  --cta-secondary-waitlist-badge: #F7C744;                   /* gold ring + text */
+  --cta-secondary-waitlist-text: rgba(255, 255, 255, 0.40); /* sub-label */
+  --cta-secondary-waitlisted-bg: rgba(15, 228, 152, 0.20);
+  --cta-secondary-waitlisted-badge: #0FE498;                 /* green ring */
+  --cta-secondary-full-bg: rgba(255, 255, 255, 0.10);
+  --cta-secondary-full-text: rgba(255, 255, 255, 0.40);
+  --cta-secondary-negative-bg: rgba(255, 89, 66, 0.10);     /* coral @ 10% */
+  --cta-secondary-negative-text: #FF5942;                   /* coral text */
 
-  /* Secondary — state variants */
-  --cta-secondary-active-bg: rgba(255, 255, 255, 0.20);
-  --cta-secondary-disabled-bg: rgba(255, 255, 255, 0.08);
-  --cta-secondary-disabled-text: rgba(255, 255, 255, 0.4);
-  --cta-secondary-booked-bg: rgba(74, 183, 74, 0.18);        /* status-positive tint */
-  --cta-secondary-booked-text: #4AB74A;
-  --cta-secondary-waitlist-bg: rgba(247, 199, 68, 0.18);     /* gold/alert tint */
-  --cta-secondary-waitlist-text: #F7C744;
-  --cta-secondary-waitlisted-bg: rgba(74, 183, 74, 0.18);
-  --cta-secondary-waitlisted-text: #4AB74A;
-  --cta-secondary-full-bg: rgba(255, 255, 255, 0.08);
-  --cta-secondary-full-text: rgba(255, 255, 255, 0.4);
-  --cta-secondary-negative-bg: rgba(176, 0, 32, 0.12);
-  --cta-secondary-negative-text: #FF5942;                     /* coral text for negative */
-
-  /* --- Tertiary CTA (plain text) --- */
+  /* --- Tertiary CTA (plain label) --- */
+  /* Transparent bg, white text, optional 50px backdrop-blur, no border. */
   --cta-tertiary-bg: transparent;
   --cta-tertiary-text: #FFFFFF;
-  --cta-tertiary-border: transparent;
-  --cta-tertiary-font-size: 14px;
-  --cta-tertiary-font-weight: 700;
+  --cta-tertiary-backdrop-blur: 50px;
+  --cta-tertiary-radius: 5px;
+  --cta-tertiary-height-lg: 40px;
+  --cta-tertiary-height-sm: 30px;
+  --cta-tertiary-font-size-lg: 14px;
+  --cta-tertiary-font-size-sm: 12px;
   --cta-tertiary-letter-spacing: 0.5px;
-  --cta-tertiary-padding-x: 12px;
-  --cta-tertiary-padding-y: 8px;
-  --cta-tertiary-disabled-text: rgba(255, 255, 255, 0.4);
+  --cta-tertiary-padding-x-lg: 20px;
+  --cta-tertiary-padding-y-lg: 11px;
+  --cta-tertiary-padding-x-sm: 15px;
+  --cta-tertiary-padding-y-sm: 7px;
+  --cta-tertiary-disabled-opacity: 0.20;
 
   /* --- Twins (double CTA row) --- */
+  /* Row of two: left=Secondary glass, right=Primary with gradient bg + white text */
   --cta-twins-gap: 10px;
-  --cta-twins-min-width: 135px;
+  --cta-twins-padding-x: 20px;                    /* container outer padding */
   --cta-twins-height-lg: 50px;
   --cta-twins-height-sm: 40px;
-
-  /* --- Shared CTA typography (matches Figma Buttons spec) --- */
-  --cta-font-family: var(--font-primary);
-  --cta-font-weight: 700;
-  --cta-font-size: 14px;
-  --cta-letter-spacing: 0.5px;
-  --cta-text-transform: uppercase;
+  /* Twins right button: gradient bg, white text (reversed from standalone Primary) */
+  --cta-twins-primary-bg: var(--cta-gradient-alt); /* gradient fills the button */
+  --cta-twins-primary-text: #FFFFFF;
 
   /* --- Font Families --- */
   --font-primary: "Inter", "Helvetica Neue", "Arial", sans-serif;
