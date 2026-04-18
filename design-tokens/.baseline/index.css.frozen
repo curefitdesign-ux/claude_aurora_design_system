@@ -91,6 +91,94 @@
   --state-pressed-bg: rgba(255, 255, 255, 0.08);
   --state-hover-bg: rgba(255, 255, 255, 0.04);
 
+  /* ============================================
+     CTA System — sourced from Figma Aurora App Design System
+     (file jD7tZtVeQCMRlIHN7L8umI — Buttons page)
+
+     RULE: CTA colors are strictly white + coral (#FF5942) + white-glass.
+     NEVER use curefit-yellow or curefit-blue on an interactive button.
+
+     Hierarchy:
+       Primary   — highest priority. White bg, coral text. Solid + outline variants.
+       Secondary — SKU / banner buttons. Glass (20% white + 10px blur), white text.
+                   Rich state variants: booked / waitlist / waitlisted / full / negative.
+       Tertiary  — plain 14px bold ALL CAPS white label. No container.
+       Twins     — double-CTA pattern (50px or 40px height, min-width 135px each).
+     ============================================ */
+
+  /* --- Primary CTA --- */
+  --cta-primary-bg: #FFFFFF;
+  --cta-primary-text: #FF5942;                    /* coral, not pink */
+  --cta-primary-border: transparent;
+  --cta-primary-radius: 8px;
+  --cta-primary-min-width: 120px;
+  --cta-primary-max-width: 335px;
+  --cta-primary-height: 44px;
+  --cta-primary-bg-hover: #FFF1EE;
+  --cta-primary-bg-pressed: #FFE1DB;
+  --cta-primary-shadow: 0 4px 14px rgba(255, 89, 66, 0.22);
+
+  /* Primary — outline variant */
+  --cta-primary-outline-bg: transparent;
+  --cta-primary-outline-text: #FF5942;
+  --cta-primary-outline-border: #FFFFFF;
+
+  /* Primary — disabled */
+  --cta-primary-disabled-bg: #2C2C2C;             /* color-bg-elevated */
+  --cta-primary-disabled-text: rgba(255, 255, 255, 0.4);
+  --cta-primary-disabled-border: transparent;
+  --cta-primary-disabled-outline-border: rgba(255, 255, 255, 0.2);
+
+  /* --- Secondary CTA (glass) --- */
+  --cta-secondary-bg: rgba(255, 255, 255, 0.20);  /* 20% opacity white */
+  --cta-secondary-backdrop-blur: 10px;            /* figma: 10px blur */
+  --cta-secondary-text: #FFFFFF;
+  --cta-secondary-border: transparent;
+  --cta-secondary-radius: 8px;
+  --cta-secondary-min-width: 120px;
+  --cta-secondary-height: 40px;
+  --cta-secondary-bg-hover: rgba(255, 255, 255, 0.28);
+  --cta-secondary-bg-pressed: rgba(255, 255, 255, 0.14);
+
+  /* Secondary — state variants */
+  --cta-secondary-active-bg: rgba(255, 255, 255, 0.20);
+  --cta-secondary-disabled-bg: rgba(255, 255, 255, 0.08);
+  --cta-secondary-disabled-text: rgba(255, 255, 255, 0.4);
+  --cta-secondary-booked-bg: rgba(74, 183, 74, 0.18);        /* status-positive tint */
+  --cta-secondary-booked-text: #4AB74A;
+  --cta-secondary-waitlist-bg: rgba(247, 199, 68, 0.18);     /* gold/alert tint */
+  --cta-secondary-waitlist-text: #F7C744;
+  --cta-secondary-waitlisted-bg: rgba(74, 183, 74, 0.18);
+  --cta-secondary-waitlisted-text: #4AB74A;
+  --cta-secondary-full-bg: rgba(255, 255, 255, 0.08);
+  --cta-secondary-full-text: rgba(255, 255, 255, 0.4);
+  --cta-secondary-negative-bg: rgba(176, 0, 32, 0.12);
+  --cta-secondary-negative-text: #FF5942;                     /* coral text for negative */
+
+  /* --- Tertiary CTA (plain text) --- */
+  --cta-tertiary-bg: transparent;
+  --cta-tertiary-text: #FFFFFF;
+  --cta-tertiary-border: transparent;
+  --cta-tertiary-font-size: 14px;
+  --cta-tertiary-font-weight: 700;
+  --cta-tertiary-letter-spacing: 0.5px;
+  --cta-tertiary-padding-x: 12px;
+  --cta-tertiary-padding-y: 8px;
+  --cta-tertiary-disabled-text: rgba(255, 255, 255, 0.4);
+
+  /* --- Twins (double CTA row) --- */
+  --cta-twins-gap: 10px;
+  --cta-twins-min-width: 135px;
+  --cta-twins-height-lg: 50px;
+  --cta-twins-height-sm: 40px;
+
+  /* --- Shared CTA typography (matches Figma Buttons spec) --- */
+  --cta-font-family: var(--font-primary);
+  --cta-font-weight: 700;
+  --cta-font-size: 14px;
+  --cta-letter-spacing: 0.5px;
+  --cta-text-transform: uppercase;
+
   /* --- Font Families --- */
   --font-primary: "Inter", "Helvetica Neue", "Arial", sans-serif;
   --font-display: "Bw Modelica SS01", "Inter", sans-serif;
@@ -159,10 +247,38 @@
   --radius-avatar: 100px; /* circular avatars */
   --radius-full: 1000px;
 
-  /* --- Backdrop Blur Scale (Handoff) --- */
+  /* --- Backdrop Blur Scale ---
+     Extended from the original weak/medium/strong trio. Named scale (xs-3xl + full)
+     for ergonomic use; legacy names are aliased so existing code keeps working.
+  */
+  --blur-xs: 4px;
+  --blur-sm: 10px;
+  --blur-md: 30px;
+  --blur-lg: 80px;
+  --blur-xl: 120px;
+  --blur-2xl: 160px;
+  --blur-3xl: 200px;
+  --blur-full: 300px;       /* for aurora-bg drifting blobs */
+  /* Legacy aliases — do not remove, kept for backward compat */
   --blur-weak: 10px;
   --blur-medium: 30px;
   --blur-strong: 80px;
+
+  /* ============================================
+     Aurora Animated Background
+     Three slow-drifting blobs (pink, yellow, blue) with full blur.
+     Applied via the .aurora-bg utility class. Tokens are configurable.
+     ============================================ */
+  --aurora-bg-blob-pink: #FF3278;
+  --aurora-bg-blob-yellow: #F5BC00;
+  --aurora-bg-blob-blue: #00BEFF;
+  --aurora-bg-blob-opacity: 0.35;
+  --aurora-bg-blob-size: 45vw;
+  --aurora-bg-blob-blur: var(--blur-3xl);      /* 200px */
+  --aurora-bg-duration-pink: 24s;
+  --aurora-bg-duration-yellow: 32s;
+  --aurora-bg-duration-blue: 28s;
+  --aurora-bg-easing: cubic-bezier(0.45, 0.05, 0.55, 0.95);
 
   /* --- Motion Tokens --- */
   --duration-instant: 0ms;
@@ -227,6 +343,9 @@ body {
   background-color: var(--color-bg-dark);
   font-family: var(--font-primary);
   color: var(--color-text-white);
+  /* Aurora animated background applied globally */
+  position: relative;
+  overflow-x: hidden;
 }
 
 #root {
@@ -235,4 +354,116 @@ body {
   align-items: center;
   min-height: 100vh;
   padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================
+   Aurora Background — three drifting blurred blobs
+   Usage: <div class="aurora-bg">…</div> or applied to body::before/::after.
+   Reduced-motion: animation paused for users who prefer it.
+   ============================================ */
+
+body::before,
+body::after,
+.aurora-bg-blob {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--aurora-bg-blob-size);
+  height: var(--aurora-bg-blob-size);
+  border-radius: 50%;
+  filter: blur(var(--aurora-bg-blob-blur));
+  opacity: var(--aurora-bg-blob-opacity);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* Pink blob — top-left drift */
+body::before {
+  background: var(--aurora-bg-blob-pink);
+  animation: aurora-drift-pink var(--aurora-bg-duration-pink) var(--aurora-bg-easing) infinite;
+}
+
+/* Yellow blob — bottom-right drift, offset phase */
+body::after {
+  background: var(--aurora-bg-blob-yellow);
+  animation: aurora-drift-yellow var(--aurora-bg-duration-yellow) var(--aurora-bg-easing) infinite;
+  animation-delay: -8s;
+}
+
+/* Blue blob — requires a real DOM element (see .aurora-bg utility below) because
+   CSS only gives us ::before + ::after. Apply .aurora-bg to a container for all three. */
+
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.aurora-bg > .aurora-bg-blob--pink {
+  background: var(--aurora-bg-blob-pink);
+  animation: aurora-drift-pink var(--aurora-bg-duration-pink) var(--aurora-bg-easing) infinite;
+}
+.aurora-bg > .aurora-bg-blob--yellow {
+  background: var(--aurora-bg-blob-yellow);
+  animation: aurora-drift-yellow var(--aurora-bg-duration-yellow) var(--aurora-bg-easing) infinite;
+  animation-delay: -8s;
+}
+.aurora-bg > .aurora-bg-blob--blue {
+  background: var(--aurora-bg-blob-blue);
+  animation: aurora-drift-blue var(--aurora-bg-duration-blue) var(--aurora-bg-easing) infinite;
+  animation-delay: -14s;
+}
+
+/* Apply the blue blob to body via a pseudo-root trick so all three show globally */
+#root::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--aurora-bg-blob-size);
+  height: var(--aurora-bg-blob-size);
+  border-radius: 50%;
+  filter: blur(var(--aurora-bg-blob-blur));
+  opacity: var(--aurora-bg-blob-opacity);
+  background: var(--aurora-bg-blob-blue);
+  animation: aurora-drift-blue var(--aurora-bg-duration-blue) var(--aurora-bg-easing) infinite;
+  animation-delay: -14s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Gentle, slow drift paths — each blob loops on its own orbit.
+   translate(-50%, -50%) keeps the blob centered before the drift. */
+@keyframes aurora-drift-pink {
+  0%   { transform: translate(-50%, -50%) translate(-30vw, -25vh); }
+  33%  { transform: translate(-50%, -50%) translate( 20vw, -10vh); }
+  66%  { transform: translate(-50%, -50%) translate( -5vw,  20vh); }
+  100% { transform: translate(-50%, -50%) translate(-30vw, -25vh); }
+}
+
+@keyframes aurora-drift-yellow {
+  0%   { transform: translate(-50%, -50%) translate( 25vw,  20vh); }
+  33%  { transform: translate(-50%, -50%) translate(-20vw,  10vh); }
+  66%  { transform: translate(-50%, -50%) translate( 10vw, -25vh); }
+  100% { transform: translate(-50%, -50%) translate( 25vw,  20vh); }
+}
+
+@keyframes aurora-drift-blue {
+  0%   { transform: translate(-50%, -50%) translate(  0vw,  25vh); }
+  33%  { transform: translate(-50%, -50%) translate( 25vw, -15vh); }
+  66%  { transform: translate(-50%, -50%) translate(-25vw,   5vh); }
+  100% { transform: translate(-50%, -50%) translate(  0vw,  25vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  #root::before,
+  .aurora-bg-blob {
+    animation: none !important;
+  }
 }

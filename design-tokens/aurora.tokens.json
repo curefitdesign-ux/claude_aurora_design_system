@@ -164,9 +164,136 @@
   },
 
   "blur": {
-    "weak":   { "$value": "10px", "$type": "dimension" },
-    "medium": { "$value": "30px", "$type": "dimension" },
-    "strong": { "$value": "80px", "$type": "dimension" }
+    "$description": "Backdrop blur scale. Extended from the original weak/medium/strong. Legacy names aliased for compat.",
+    "xs":     { "$value": "4px",   "$type": "dimension" },
+    "sm":     { "$value": "10px",  "$type": "dimension" },
+    "md":     { "$value": "30px",  "$type": "dimension" },
+    "lg":     { "$value": "80px",  "$type": "dimension" },
+    "xl":     { "$value": "120px", "$type": "dimension" },
+    "2xl":    { "$value": "160px", "$type": "dimension" },
+    "3xl":    { "$value": "200px", "$type": "dimension" },
+    "full":   { "$value": "300px", "$type": "dimension", "$description": "Used by aurora-bg drifting blobs" },
+    "weak":   { "$value": "{blur.sm}", "$type": "dimension" },
+    "medium": { "$value": "{blur.md}", "$type": "dimension" },
+    "strong": { "$value": "{blur.lg}", "$type": "dimension" }
+  },
+
+  "cta": {
+    "$description": "CTA system — sourced directly from Figma Aurora App Design System (file jD7tZtVeQCMRlIHN7L8umI, Buttons page). STRICT RULE: interactive buttons use ONLY white + coral (#FF5942) + white-glass. Never yellow, never blue.",
+
+    "shared": {
+      "font-family":     { "$value": "{font.family.primary}" },
+      "font-size":       { "$value": "14px", "$type": "dimension" },
+      "font-weight":     { "$value": 700 },
+      "letter-spacing":  { "$value": "0.5px", "$type": "dimension" },
+      "text-transform":  { "$value": "uppercase" }
+    },
+
+    "primary": {
+      "$description": "Highest-priority action. White container, coral text. Dynamic width 120–335px.",
+      "bg":           { "$value": "#FFFFFF", "$type": "color" },
+      "text":         { "$value": "{color.accent.coral}", "$type": "color" },
+      "border":       { "$value": "transparent", "$type": "color" },
+      "radius":       { "$value": "8px", "$type": "dimension" },
+      "min-width":    { "$value": "120px", "$type": "dimension" },
+      "max-width":    { "$value": "335px", "$type": "dimension" },
+      "height":       { "$value": "44px", "$type": "dimension" },
+      "bg-hover":     { "$value": "#FFF1EE", "$type": "color" },
+      "bg-pressed":   { "$value": "#FFE1DB", "$type": "color" },
+      "shadow":       { "$value": "0 4px 14px rgba(255,89,66,0.22)", "$type": "shadow" },
+      "outline": {
+        "bg":     { "$value": "transparent", "$type": "color" },
+        "text":   { "$value": "{color.accent.coral}", "$type": "color" },
+        "border": { "$value": "#FFFFFF", "$type": "color" }
+      },
+      "disabled": {
+        "bg":             { "$value": "{color.bg.elevated}", "$type": "color" },
+        "text":           { "$value": "rgba(255,255,255,0.4)", "$type": "color" },
+        "border":         { "$value": "transparent", "$type": "color" },
+        "outline-border": { "$value": "rgba(255,255,255,0.2)", "$type": "color" }
+      }
+    },
+
+    "secondary": {
+      "$description": "SKU / banner buttons. Glass morphism: 20% opacity white + 10px backdrop blur. Can have icons. Rich state variants.",
+      "bg":             { "$value": "rgba(255,255,255,0.20)", "$type": "color" },
+      "backdrop-blur":  { "$value": "10px", "$type": "dimension" },
+      "text":           { "$value": "#FFFFFF", "$type": "color" },
+      "border":         { "$value": "transparent", "$type": "color" },
+      "radius":         { "$value": "8px", "$type": "dimension" },
+      "min-width":      { "$value": "120px", "$type": "dimension" },
+      "height":         { "$value": "40px", "$type": "dimension" },
+      "bg-hover":       { "$value": "rgba(255,255,255,0.28)", "$type": "color" },
+      "bg-pressed":     { "$value": "rgba(255,255,255,0.14)", "$type": "color" },
+      "states": {
+        "active":     { "bg": { "$value": "rgba(255,255,255,0.20)", "$type": "color" } },
+        "disabled":   {
+          "bg":   { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
+          "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+        },
+        "booked":     {
+          "bg":   { "$value": "rgba(74,183,74,0.18)", "$type": "color" },
+          "text": { "$value": "{color.status.positive}", "$type": "color" },
+          "icon": { "$value": "checkmark" }
+        },
+        "waitlist":   {
+          "$description": "Available with countdown badge",
+          "bg":    { "$value": "rgba(247,199,68,0.18)", "$type": "color" },
+          "text":  { "$value": "{color.accent.gold}", "$type": "color" },
+          "badge": { "$value": "count" }
+        },
+        "waitlisted": {
+          "bg":    { "$value": "rgba(74,183,74,0.18)", "$type": "color" },
+          "text":  { "$value": "{color.status.positive}", "$type": "color" },
+          "badge": { "$value": "count" }
+        },
+        "waitlist-full": {
+          "bg":   { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
+          "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+        },
+        "negative":   {
+          "bg":   { "$value": "rgba(176,0,32,0.12)", "$type": "color" },
+          "text": { "$value": "{color.accent.coral}", "$type": "color" }
+        }
+      }
+    },
+
+    "tertiary": {
+      "$description": "Plain 14px bold ALL CAPS white label. 0.5px letter-spacing. No container.",
+      "bg":             { "$value": "transparent", "$type": "color" },
+      "text":           { "$value": "#FFFFFF", "$type": "color" },
+      "border":         { "$value": "transparent", "$type": "color" },
+      "font-size":      { "$value": "14px", "$type": "dimension" },
+      "font-weight":    { "$value": 700 },
+      "letter-spacing": { "$value": "0.5px", "$type": "dimension" },
+      "padding-x":      { "$value": "12px", "$type": "dimension" },
+      "padding-y":      { "$value": "8px", "$type": "dimension" },
+      "disabled": {
+        "text": { "$value": "rgba(255,255,255,0.4)", "$type": "color" }
+      }
+    },
+
+    "twins": {
+      "$description": "Double-CTA row. Pairs two buttons side-by-side at equal width.",
+      "gap":        { "$value": "10px", "$type": "dimension" },
+      "min-width":  { "$value": "135px", "$type": "dimension" },
+      "height-lg":  { "$value": "50px", "$type": "dimension" },
+      "height-sm":  { "$value": "40px", "$type": "dimension" }
+    }
+  },
+
+  "aurora-bg": {
+    "$description": "Global animated background: three drifting blurred blobs (pink, yellow, blue). Applied via body::before/after and #root::before in index.css.",
+    "blob-pink":         { "$value": "{color.curefit.pink}", "$type": "color" },
+    "blob-yellow":       { "$value": "{color.curefit.yellow}", "$type": "color" },
+    "blob-blue":         { "$value": "{color.curefit.blue}", "$type": "color" },
+    "blob-opacity":      { "$value": 0.35 },
+    "blob-size":         { "$value": "45vw", "$type": "dimension" },
+    "blob-blur":         { "$value": "{blur.3xl}", "$type": "dimension" },
+    "duration-pink":     { "$value": "24s", "$type": "duration" },
+    "duration-yellow":   { "$value": "32s", "$type": "duration" },
+    "duration-blue":     { "$value": "28s", "$type": "duration" },
+    "easing":            { "$value": "cubic-bezier(0.45, 0.05, 0.55, 0.95)" }
   },
 
   "shadow": {

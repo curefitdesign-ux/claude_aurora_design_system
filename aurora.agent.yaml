@@ -8,20 +8,44 @@
 # Source of truth: design-tokens/aurora.tokens.json
 # Companion docs: TOKENS.md (token reference), CLAUDE.md (project rules)
 
-version: 1
+version: 2
 design_system: aurora
 non_destructive: true
 
+# ====================================================================
+# CRITICAL CTA RULE — sourced from Figma Aurora (jD7tZtVeQCMRlIHN7L8umI)
+# ====================================================================
+# Interactive buttons use ONLY white + coral (#FF5942) + white-glass.
+# Never yellow. Never blue. Never green (except booked-state tint).
+# Reach for cta.* tokens — not color.curefit.* — when building a button.
+
+cta_rule:
+  source: "Figma Aurora App Design System / Buttons page"
+  allowed_colors: ["#FFFFFF", "#FF5942"]
+  forbidden_colors: ["#F5BC00", "#00BEFF", "#0FE498", "#FF3278"]
+  forbidden_tokens_in_cta:
+    - color.curefit.yellow
+    - color.curefit.blue
+    - color.curefit.green
+    - color.curefit.pink                # not used in Aurora CTAs (coral is)
+    - color.surface.action.primary      # deprecated — aliased to yellow
+  levels:
+    primary:   "White bg, coral text. Highest-priority page action. Dynamic width 120–335px, 44px tall. Solid + outline variants."
+    secondary: "Glass (20% white + 10px backdrop-blur), white text. SKU/banner buttons. 40px tall. Rich states: booked/waitlist/waitlisted/full/negative."
+    tertiary:  "Plain 14px bold ALL CAPS white label. 0.5px letter-spacing. No container."
+    twins:     "Double-CTA row. Two buttons side-by-side, 50px or 40px height, min 135px each."
+
 principles:
-  - Never hardcode hex values — always use color.* tokens.
+  - "CTA RULE (non-negotiable, from Figma): buttons use only white + coral + white-glass. Use cta.primary / cta.secondary / cta.tertiary / cta.twins."
+  - Never hardcode hex values — always use color.* / cta.* tokens.
   - Never hardcode font families — use font.family.* tokens.
-  - Prefer semantic tokens (color.surface.*) over primitives (color.curefit.*).
+  - Prefer semantic tokens (color.surface.*, cta.*) over primitives (color.curefit.*).
   - Use the 5px spacing rhythm (spacing.1 through spacing.30).
   - Radius comes from radius.* (card=10, chip=15, pill=50, etc.).
   - Shadows come from shadow.* or the elevation.* pairs.
   - Motion: duration.* + easing.* tokens. No ad-hoc timings.
   - Focus states use shadow.focus.
-  - Disabled states use state.disabled-opacity + state.disabled-bg.
+  - Disabled states on CTAs use cta.disabled.*; elsewhere use state.disabled-*.
 
 recipes:
 
@@ -39,27 +63,131 @@ recipes:
       text_style: text-style.p5
       color: color.text.muted
 
-  pill_button_primary:
-    description: ALL-CAPS pill CTA. Primary action.
+  cta_primary:
+    description: >
+      Primary CTA — highest-priority page action. Solid white container with coral
+      (#FF5942) text. Dynamic width: min 120px, max 335px. Height 44px.
+      Has a solid variant (default) and an outline variant.
     tokens:
-      background: color.surface.action.primary
-      color: color.dark.primary
-      radius: radius.pill
-      padding_x: spacing.5
-      padding_y: spacing.3
-      text_style: text-style.cta
+      background: cta.primary.bg          # #FFFFFF
+      color:      cta.primary.text        # #FF5942 (coral)
+      border:     cta.primary.border      # transparent
+      radius:     cta.primary.radius      # 8px
+      min_width:  cta.primary.min-width   # 120px
+      max_width:  cta.primary.max-width   # 335px
+      height:     cta.primary.height      # 44px
+      shadow:     cta.primary.shadow
+      font_family:    cta.shared.font-family
+      font_size:      cta.shared.font-size       # 14px
+      font_weight:    cta.shared.font-weight     # 700
+      letter_spacing: cta.shared.letter-spacing  # 0.5px
+      text_transform: cta.shared.text-transform  # uppercase
     transition:
-      property: background-color
+      property: "background-color, color"
       duration: duration.normal
-      easing: easing.default
+      easing:   easing.default
+    hover:
+      background: cta.primary.bg-hover
     pressed:
-      background: state.pressed-bg
+      background: cta.primary.bg-pressed
+    variants:
+      outline:
+        background: cta.primary.outline.bg
+        color:      cta.primary.outline.text
+        border:     cta.primary.outline.border    # 1px white
     disabled:
-      opacity: state.disabled-opacity
-      background: state.disabled-bg
+      background:      cta.primary.disabled.bg          # bg-elevated
+      color:           cta.primary.disabled.text        # white @ 40%
+      border:          cta.primary.disabled.border
+      outline_border:  cta.primary.disabled.outline-border
+
+  cta_secondary:
+    description: >
+      Secondary CTA — glass-morphism button for SKU/banner rows. 20% opacity white
+      fill with 10px backdrop-blur. White text. Height 40px, min-width 120px.
+      Can include icons (e.g. checkmark for booked, count badge for waitlist).
+      Rich state variants mapped below.
+    tokens:
+      background:      cta.secondary.bg              # rgba(255,255,255,0.20)
+      backdrop_blur:   cta.secondary.backdrop-blur   # 10px
+      color:           cta.secondary.text            # #FFFFFF
+      border:          cta.secondary.border
+      radius:          cta.secondary.radius          # 8px
+      min_width:       cta.secondary.min-width       # 120px
+      height:          cta.secondary.height          # 40px
+      font_family:     cta.shared.font-family
+      font_size:       cta.shared.font-size
+      font_weight:     cta.shared.font-weight
+      letter_spacing:  cta.shared.letter-spacing
+      text_transform:  cta.shared.text-transform
+    transition:
+      property: "background-color"
+      duration: duration.normal
+      easing:   easing.default
+    hover:
+      background: cta.secondary.bg-hover
+    pressed:
+      background: cta.secondary.bg-pressed
+    states:
+      active:
+        background: cta.secondary.states.active.bg
+      disabled:
+        background: cta.secondary.states.disabled.bg
+        color:      cta.secondary.states.disabled.text
+      booked:
+        background: cta.secondary.states.booked.bg       # positive tint
+        color:      cta.secondary.states.booked.text     # status-positive
+        leading_icon: checkmark
+      waitlist:
+        description: "Slots available — show count badge + 'JOIN WAITLIST' sub-label."
+        background: cta.secondary.states.waitlist.bg
+        color:      cta.secondary.states.waitlist.text   # gold
+        leading_badge: count
+      waitlisted:
+        description: "User already on waitlist — show count badge + 'WAITLISTED'."
+        background: cta.secondary.states.waitlisted.bg
+        color:      cta.secondary.states.waitlisted.text
+        leading_badge: count
+      waitlist_full:
+        background: cta.secondary.states.waitlist-full.bg
+        color:      cta.secondary.states.waitlist-full.text
+      negative:
+        background: cta.secondary.states.negative.bg
+        color:      cta.secondary.states.negative.text   # coral
+
+  cta_tertiary:
+    description: >
+      Tertiary CTA — plain white text, NO container. 14px bold, ALL CAPS,
+      0.5px letter-spacing. Used for in-line nudges, "see more", inline actions.
+    tokens:
+      background:      cta.tertiary.bg             # transparent
+      color:           cta.tertiary.text           # #FFFFFF
+      border:          cta.tertiary.border         # none
+      font_size:       cta.tertiary.font-size      # 14px
+      font_weight:     cta.tertiary.font-weight    # 700
+      letter_spacing:  cta.tertiary.letter-spacing # 0.5px
+      padding_x:       cta.tertiary.padding-x      # 12px
+      padding_y:       cta.tertiary.padding-y      # 8px
+      text_transform:  uppercase
+    disabled:
+      color: cta.tertiary.disabled.text
+
+  cta_twins:
+    description: >
+      Double-CTA row — pairs two buttons side-by-side. Two height options (50px, 40px).
+      Each child uses min-width 135px. Common combos: primary + primary, primary + secondary.
+    tokens:
+      arrangement: row
+      gap:         cta.twins.gap         # 10px
+      min_width:   cta.twins.min-width   # 135px per button
+      height_lg:   cta.twins.height-lg   # 50px
+      height_sm:   cta.twins.height-sm   # 40px
+    notes:
+      - "Each child is an instance of cta_primary or cta_secondary — twins itself has no color."
+      - "Use min-height 50 for page-level confirm/cancel, 40 for inline row actions."
 
   chip:
-    description: Small tappable label.
+    description: Small tappable label (not a CTA — different visual language).
     tokens:
       background: color.white-alpha.10
       color: color.text.white
@@ -74,11 +202,11 @@ recipes:
     description: Centered modal with scrim.
     scrim:
       background: color.semantic.scrim
-      backdrop_blur: blur.weak
+      backdrop_blur: blur.sm           # 10px
       z: z.modal
     sheet:
       background: color.elevation.modal.bg
-      radius: radius.3xl  # top-only when bottom sheet
+      radius: radius.3xl
       shadow: shadow.modal
       z: z.modal
     enter_motion:
@@ -124,7 +252,34 @@ recipes:
       text_style: text-style.h5
       color: color.text.white
 
+  aurora_background:
+    description: >
+      Global animated background with three slow-drifting blurred blobs
+      (pink, yellow, blue). Applied globally via body::before, body::after,
+      and #root::before in index.css. Also available as a scoped utility
+      class (.aurora-bg) for containers. Respects prefers-reduced-motion.
+    tokens:
+      blob_pink:        aurora-bg.blob-pink
+      blob_yellow:      aurora-bg.blob-yellow
+      blob_blue:        aurora-bg.blob-blue
+      blob_opacity:     aurora-bg.blob-opacity       # 0.35
+      blob_size:        aurora-bg.blob-size          # 45vw
+      blob_blur:        aurora-bg.blob-blur          # 200px (blur.3xl)
+      duration_pink:    aurora-bg.duration-pink      # 24s
+      duration_yellow:  aurora-bg.duration-yellow    # 32s
+      duration_blue:    aurora-bg.duration-blue      # 28s
+      easing:           aurora-bg.easing
+    notes:
+      - "Blobs use filter: blur(...) and loop on separate keyframes (aurora-drift-{pink,yellow,blue}) so they never sync."
+      - "Blobs sit at z-index: 0 (or -1 for #root::before) so content sits above them."
+      - "The aurora-bg colors are the ONLY place yellow and blue appear in motion — they're background decoration, not CTAs."
+
 anti_patterns:
+  - "Using color.curefit.yellow or color.curefit.blue on a button — forbidden. Use cta.* tokens."
+  - "Using color.surface.action.primary (yellow) for a CTA — deprecated for CTAs."
+  - "Solid color background on a screen — always sits on top of the aurora-bg drifting blobs."
+  - "Synchronizing all three aurora-bg blobs to the same duration — they should be different (24s / 28s / 32s) to avoid a pulse."
+  - "Adding a new CTA variant with a different color — propose it to design first; the three-level pink/white hierarchy is intentional."
   - "Wrapping a card in an extra div just to add padding — put padding on the card itself."
   - "Using shadow.high on cards — reserve it for sheets/modals."
   - "Using text-style.h1 for a card title — use text-style.h4."
@@ -137,9 +292,12 @@ platform_mappings:
     color: "text-[var(--color-{token})]"
     radius: "rounded-[var(--radius-{token})]"
     spacing: "p-[var(--spacing-{token})]"
+    cta_primary: "bg-[var(--cta-primary-bg)] text-[var(--cta-primary-text)]"
+    cta_secondary: "bg-[var(--cta-secondary-bg)] text-[var(--cta-secondary-text)]"
+    cta_tertiary: "bg-transparent text-[var(--cta-tertiary-text)] border border-[var(--cta-tertiary-border)]"
   ios_swift:
     access: "Aurora.color.{camelCase(token)}"
   android_compose:
     access: "AuroraTheme.color.{camelCase(token)}"
   react_native:
-    import: "import { color, spacing, radius } from '@aurora/tokens'"
+    import: "import { color, spacing, radius, cta } from '@aurora/tokens'"

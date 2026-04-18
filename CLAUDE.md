@@ -100,6 +100,27 @@ All tokens are defined as CSS custom properties in `my-app/src/index.css` inside
 - IMPORTANT: Use the shadow scale — `shadow-[--shadow-low]`, `shadow-[--shadow-medium]`, etc.
 - Add new design tokens to the `@theme` block in `my-app/src/index.css`, not in a separate config file
 
+### 🚨 CTA RULE (strict, sourced from Figma)
+
+**Source:** Figma Aurora App Design System (`jD7tZtVeQCMRlIHN7L8umI`), Buttons page.
+
+**Rule:** interactive buttons use only white (`#FFFFFF`) + coral (`#FF5942`) + white-glass. Never yellow, blue, green, or true pink. Four components:
+
+- **Primary CTA** — `bg: var(--cta-primary-bg)` (white), `text: var(--cta-primary-text)` (coral `#FF5942`). 44px tall, min 120 / max 335 wide. Solid + outline variants.
+- **Secondary CTA** — `bg: var(--cta-secondary-bg)` (white @ 20%) + `backdrop-filter: blur(var(--cta-secondary-backdrop-blur))` (10px), `text: var(--cta-secondary-text)` (white). 40px tall, min 120 wide. Rich states (booked / waitlist / waitlisted / full / negative).
+- **Tertiary CTA** — transparent, white text, 14px bold ALL CAPS, 0.5px tracking. No container.
+- **Twins** — row of two CTAs (50 or 40px tall, 135px min each). Used for confirm/cancel-style pairs.
+
+Anti-patterns to reject:
+- `bg-curefit-yellow` / `bg-curefit-blue` / `bg-curefit-pink` on a button — forbidden.
+- `color.surface.action.primary` (yellow) on a CTA — deprecated for CTAs.
+- Skipping the 10px backdrop-blur on secondary — it's part of the token spec.
+- Adding a fifth CTA variant — primary/secondary/tertiary/twins cover every case.
+
+### Aurora animated background
+
+Every screen sits on three slow-drifting blurred blobs (pink, yellow, blue). Applied globally via `body::before`, `body::after`, and `#root::before` in `my-app/src/index.css` — do not duplicate per page. Tokens: `--aurora-bg-blob-*`, `--aurora-bg-duration-*`. Yellow and blue appear here (as background motion) but NEVER in CTAs — keep the two worlds separate.
+
 ### Extended Tokens (Enhancement Layer)
 
 Added non-destructively from Global Dev Handoff V2. All existing Aurora tokens remain intact.
