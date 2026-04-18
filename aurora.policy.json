@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": 1,
+  "version": 2,
   "design_system": "aurora",
   "source_of_truth": [
     "design-tokens/aurora.tokens.json",
@@ -22,9 +22,17 @@
     "Handlee",
     "BenchNine",
     "Helvetica Neue",
+    "Helvetica",
     "Segoe Script",
     "Comic Sans",
-    "Arial Narrow"
+    "Arial Narrow",
+    "Pacifico",
+    "Dancing Script",
+    "Kalam",
+    "Shadows Into Light",
+    "Homemade Apple",
+    "cursive",
+    "script"
   ],
 
   "brand_colors": {
@@ -36,11 +44,22 @@
     "coral": "#FF5942",
     "gold": "#F7C744"
   },
-  "forbidden_hex_in_components": [
-    "#F4F0E6",
-    "#7F5BFF",
-    "#3888FF"
-  ],
+
+  "forbidden_hex_families": {
+    "cream_beige_surfaces": [
+      "#F4F0E6", "#EDE7DB", "#FBF0F0", "#FFE5A6", "#FFDF8D",
+      "#E0BC84", "#D7B855", "#C67F52", "#6E5A48", "#86754B",
+      "#9E6A1B", "#E9BE6A", "#F2C94C", "#F4CA6D", "#F5CB78",
+      "#F7CD7A", "#FAD17E", "#FFD371", "#FFD576"
+    ],
+    "purple_lavender_accents": [
+      "#7F5BFF", "#9A8FE5", "#B5A1E5", "#856994", "#96679E",
+      "#5D305D", "#D16CBA", "#BC648B"
+    ],
+    "rogue_brand_blues": [
+      "#3888FF", "#307AFF", "#4C8CFF", "#98BCEF", "#A1C8F3"
+    ]
+  },
 
   "cta": {
     "levels": ["primary", "secondary", "tertiary", "twins"],
@@ -67,7 +86,16 @@
   "card": {
     "default_bg": "rgba(255, 255, 255, 0.10)",
     "default_backdrop_blur": "30px",
-    "radius_token": "radius-card"
+    "radius_token": "radius-card",
+    "forbidden_bg_patterns": [
+      "cream",
+      "beige",
+      "parchment",
+      "#F4F0E6",
+      "#EDE7DB",
+      "rgb(244, 240, 230)",
+      "rgb(237, 231, 219)"
+    ]
   },
 
   "rules": [
@@ -75,7 +103,25 @@
     "CTAs must render their label via .aurora-cta utility (text-transform:uppercase baked in) — no <button class=\"bg-curefit-yellow\">.",
     "No spacing off the 5px rhythm. No px radius outside the radius scale.",
     "Motion uses --duration-* + --easing-* tokens.",
-    "Fonts limited to allowed_fonts; forbidden_fonts must not appear in imports or font-family.",
+    "Fonts limited to allowed_fonts; forbidden_fonts must not appear in imports, fontFamily, or className.",
+    "No handwritten script fonts anywhere — Aurora is Inter-forward.",
+    "No cream / beige / parchment card surfaces. Cards are rgba(255,255,255,0.10) dark or rgba(255,255,255,0.60) white.",
+    "No purple / lavender text or accents. Aurora accents are yellow / pink / blue / green / coral / gold only.",
+    "Display type on a card must use tokens from --text-h*. No raw fontSize > 32px with inline fontFamily.",
     "Every pixel decision traces to a Figma source (app or web)."
+  ],
+
+  "banned_anti_patterns": [
+    {
+      "name": "Cream-and-purple dashboard card",
+      "smells": [
+        "cream / parchment / beige bg (hex family around #F4F0E6)",
+        "purple handwritten accent labels (hex family around #7F5BFF)",
+        "oversized black display type in Helvetica/Helvetica Neue",
+        "mixed Inter + handwriting + display-serif on one surface"
+      ],
+      "reject": true,
+      "why": "Not in Figma Aurora App or Web DS. Breaks both themes and the brand palette."
+    }
   ]
 }

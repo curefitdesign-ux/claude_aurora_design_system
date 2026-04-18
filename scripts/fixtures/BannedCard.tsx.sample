@@ -1,0 +1,18 @@
+/**
+ * INTENTIONALLY OFF-BRAND — fixture for scripts/check-aurora.mjs.
+ * This file uses the `.sample` extension so the linter does not
+ * scan it in production. We copy it to .tsx temporarily inside
+ * scripts/test-linter.sh to verify the check catches violations.
+ *
+ * Represents the banned "cream + purple handwriting" dashboard card.
+ */
+export function BannedCard() {
+  return (
+    <div style={{ background: "#F4F0E6", fontFamily: "Helvetica Neue" }}>
+      <span style={{ color: "#7F5BFF", fontFamily: "Caveat" }}>Codex</span>
+      <span style={{ color: "rgb(127, 91, 255)", fontFamily: "Handlee" }}>$707</span>
+      <button className="bg-curefit-yellow">book now</button>
+      <button style={{ textTransform: "none" }}>BROKEN</button>
+    </div>
+  );
+}

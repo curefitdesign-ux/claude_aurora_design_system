@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "aurora:check": "node ../scripts/check-aurora.mjs"
+    "aurora:check": "node ../scripts/check-aurora.mjs",
+    "aurora:test": "bash ../scripts/test-linter.sh"
   },
   "dependencies": {
     "react": "^19.2.0",

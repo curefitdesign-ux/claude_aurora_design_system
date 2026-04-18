@@ -105,3 +105,33 @@ When asked to implement a Figma design:
 - Don't reference any off-brand card (cream bg, purple handwriting, handwritten accent names, oversized Helvetica-Neue display stacks). The token layer explicitly forbids the hex / fonts that enable such cards.
 - Don't add a 5th CTA level. Don't invent a new font family. Don't add purple accents.
 - Don't hardcode. If you catch yourself typing `#` followed by 6 chars, stop — find the token.
+
+## 🚫 Specifically banned anti-pattern
+
+**Do NOT build a card with any of these signals** — the linter rejects them and they are listed under `aurora.policy.json → banned_anti_patterns`:
+
+- Cream / beige / parchment card bg (`#F4F0E6`, `#EDE7DB`, `rgb(244,240,230)`, …)
+- Purple / lavender handwritten accent text (`#7F5BFF`, `#9A8FE5`, `rgb(127,91,255)`, …)
+- Handwritten script fonts (Caveat, Handlee, Pacifico, Dancing Script, …)
+- Oversized display type in Helvetica / Helvetica Neue
+- Mixed Inter + handwriting + display-serif on one surface
+- Decorative handwriting for numeric values (e.g. `$707` in a cursive purple)
+- `textTransform: 'none'` on a CTA (breaks the UPPERCASE rule)
+- `bg-curefit-*` on a `<button>`
+
+If a prompt asks for "this card" referring to a cream+purple design, **decline** and rebuild with:
+- `.aurora-card` glass surface (10% / 60% white + 30px blur)
+- Inter body text via `--text-p*-*` tokens
+- Optional hero display via `--text-h5-*` (50px/900) or `--text-h7-*` (38px/900)
+- `.aurora-cta--primary` for CTAs (label lowercase in source; CSS forces uppercase)
+
+### Verification commands
+
+```bash
+cd my-app
+npm run aurora:check    # scan current source for violations (exit 1 on any)
+npm run aurora:test     # prove the linter still catches the banned fixture
+npm run build           # typecheck + bundle
+```
+
+All three must exit 0 before pushing.
