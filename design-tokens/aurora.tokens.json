@@ -1,0 +1,233 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "$description": "Aurora Design System tokens in W3C DTCG format. Single source of truth — generated CSS/TS/Swift/Kotlin/JSON all derive from this file. Non-destructive by design: every value here must match the frozen index.css baseline byte-for-byte.",
+
+  "color": {
+    "curefit": {
+      "yellow":       { "$value": "#F5BC00", "$type": "color", "$description": "Primary brand yellow" },
+      "yellow-light": { "$value": "#FFDC18", "$type": "color" },
+      "pink":         { "$value": "#FF3278", "$type": "color" },
+      "blue":         { "$value": "#00BEFF", "$type": "color" },
+      "green":        { "$value": "#0FE498", "$type": "color" }
+    },
+
+    "dark": {
+      "primary":   { "$value": "#1C1C1E", "$type": "color" },
+      "secondary": { "$value": "#2C2C2C", "$type": "color" },
+      "ink":       { "$value": "#141515", "$type": "color" },
+      "action":    { "$value": "#333333", "$type": "color" }
+    },
+    "light": {
+      "primary": { "$value": "#FFFFFF", "$type": "color" },
+      "action":  { "$value": "#F0F0F0", "$type": "color" }
+    },
+
+    "status": {
+      "positive": { "$value": "#4AB74A", "$type": "color" },
+      "negative": { "$value": "#B00020", "$type": "color" },
+      "alert":    { "$value": "#F5BC00", "$type": "color" },
+      "neutral":  { "$value": "#00BEFF", "$type": "color" }
+    },
+
+    "text": {
+      "white":    { "$value": "#FFFFFF", "$type": "color" },
+      "dark":     { "$value": "#313028", "$type": "color" },
+      "muted":    { "$value": "#999CA0", "$type": "color", "$description": "Trunks — secondary text" },
+      "disabled": { "$value": "rgba(255,255,255,0.1)", "$type": "color" }
+    },
+
+    "bg": {
+      "dark":     { "$value": "#1A1A1A", "$type": "color" },
+      "card":     { "$value": "#1C1C1E", "$type": "color" },
+      "elevated": { "$value": "#2C2C2C", "$type": "color" },
+      "surface":  { "$value": "#232323", "$type": "color" },
+      "card-light": { "$value": "#F4F0E6", "$type": "color" }
+    },
+
+    "gray": {
+      "50":  { "$value": "#F7F7F7", "$type": "color" },
+      "100": { "$value": "#F0F0F0", "$type": "color" },
+      "200": { "$value": "#E0E0E0", "$type": "color" },
+      "300": { "$value": "#D9D9D9", "$type": "color" },
+      "400": { "$value": "#C4C4C4", "$type": "color" },
+      "500": { "$value": "#999CA0", "$type": "color" },
+      "600": { "$value": "#808080", "$type": "color" },
+      "700": { "$value": "#666666", "$type": "color" },
+      "800": { "$value": "#434343", "$type": "color" },
+      "900": { "$value": "#2C2C2C", "$type": "color" }
+    },
+
+    "white-alpha": {
+      "10": { "$value": "rgba(255,255,255,0.1)", "$type": "color" },
+      "20": { "$value": "rgba(255,255,255,0.2)", "$type": "color" },
+      "40": { "$value": "rgba(255,255,255,0.4)", "$type": "color" },
+      "60": { "$value": "rgba(255,255,255,0.6)", "$type": "color" }
+    },
+
+    "accent": {
+      "purple": { "$value": "#7F5BFF", "$type": "color" },
+      "orange": { "$value": "#FF9700", "$type": "color" },
+      "coral":  { "$value": "#FF5942", "$type": "color" },
+      "gold":   { "$value": "#F7C744", "$type": "color" },
+      "blue":   { "$value": "#3888FF", "$type": "color" }
+    },
+
+    "line": {
+      "gray": { "$value": "#B3B3B3", "$type": "color" }
+    },
+
+    "semantic": {
+      "scrim":          { "$value": "rgba(0,0,0,0.6)", "$type": "color" },
+      "overlay":        { "$value": "rgba(0,0,0,0.4)", "$type": "color" },
+      "divider":        { "$value": "rgba(255,255,255,0.1)", "$type": "color" },
+      "divider-light":  { "$value": "rgba(0,0,0,0.08)", "$type": "color" },
+      "focus-ring":     { "$value": "{color.curefit.blue}", "$type": "color" }
+    },
+
+    "surface": {
+      "$description": "Semantic aliases — what components should consume. Resolve to primitives above, so no visual change.",
+      "app-bg":    { "$value": "{color.bg.dark}", "$type": "color" },
+      "card-bg":   { "$value": "{color.bg.card}", "$type": "color" },
+      "sheet-bg":  { "$value": "{color.bg.elevated}", "$type": "color" },
+      "action": {
+        "primary":   { "$value": "{color.curefit.yellow}", "$type": "color" },
+        "secondary": { "$value": "{color.white-alpha.10}", "$type": "color" }
+      }
+    }
+  },
+
+  "font": {
+    "family": {
+      "primary":      { "$value": "Inter, 'Helvetica Neue', Arial, sans-serif", "$type": "fontFamily" },
+      "display":      { "$value": "'Bw Modelica SS01', Inter, sans-serif", "$type": "fontFamily" },
+      "mono":         { "$value": "'Roboto Mono', monospace", "$type": "fontFamily" },
+      "bebas":        { "$value": "'Bebas Neue', sans-serif", "$type": "fontFamily" },
+      "heading":      { "$value": "'Helvetica Neue', Helvetica, Arial, sans-serif", "$type": "fontFamily" },
+      "handwritten":  { "$value": "Caveat, 'Segoe Script', cursive", "$type": "fontFamily" },
+      "handlee":      { "$value": "Handlee, Caveat, cursive", "$type": "fontFamily" },
+      "label":        { "$value": "BenchNine, 'Arial Narrow', sans-serif", "$type": "fontFamily" }
+    }
+  },
+
+  "text-style": {
+    "$description": "Aurora typography scale. Each style exposes size/weight/line-height/letter-spacing.",
+    "h1":  { "size": {"$value":"20px"}, "weight":{"$value":700}, "lh":{"$value":1.4},  "ls":{"$value":"-0.2px"} },
+    "h2":  { "size": {"$value":"18px"}, "weight":{"$value":700}, "lh":{"$value":1.4},  "ls":{"$value":"-0.2px"} },
+    "h3":  { "size": {"$value":"18px"}, "weight":{"$value":500}, "lh":{"$value":1.4},  "ls":{"$value":"-0.2px"} },
+    "h4":  { "size": {"$value":"16px"}, "weight":{"$value":700}, "lh":{"$value":1.4},  "ls":{"$value":"-0.1px"} },
+    "h5":  { "size": {"$value":"50px"}, "weight":{"$value":900}, "lh":{"$value":1.0},  "ls":{"$value":"-2.5px"} },
+    "h7":  { "size": {"$value":"38px"}, "weight":{"$value":900}, "lh":{"$value":1.05}, "ls":{"$value":"-1.6px"} },
+    "h8":  { "size": {"$value":"35px"}, "weight":{"$value":500}, "lh":{"$value":1.1},  "ls":{"$value":"-1.0px"} },
+    "h9":  { "size": {"$value":"24px"}, "weight":{"$value":800}, "lh":{"$value":1.2},  "ls":{"$value":"-0.5px"} },
+    "h10": { "size": {"$value":"30px"}, "weight":{"$value":700}, "lh":{"$value":1.15}, "ls":{"$value":"-0.8px"} },
+    "p1":  { "size": {"$value":"16px"}, "weight":{"$value":500}, "lh":{"$value":1.5},  "ls":{"$value":"0"} },
+    "p2":  { "size": {"$value":"16px"}, "weight":{"$value":400}, "lh":{"$value":1.5},  "ls":{"$value":"0"} },
+    "p3":  { "size": {"$value":"14px"}, "weight":{"$value":700}, "lh":{"$value":1.5},  "ls":{"$value":"0"} },
+    "p4":  { "size": {"$value":"14px"}, "weight":{"$value":500}, "lh":{"$value":1.5},  "ls":{"$value":"0"} },
+    "p5":  { "size": {"$value":"14px"}, "weight":{"$value":400}, "lh":{"$value":1.5},  "ls":{"$value":"0"} },
+    "p6":  { "size": {"$value":"12px"}, "weight":{"$value":700}, "lh":{"$value":1.4},  "ls":{"$value":"2.4px"} },
+    "p8":  { "size": {"$value":"12px"}, "weight":{"$value":400}, "lh":{"$value":1.4},  "ls":{"$value":"0"} },
+    "p10": { "size": {"$value":"10px"}, "weight":{"$value":400}, "lh":{"$value":1.3},  "ls":{"$value":"0"} },
+    "cta": { "size": {"$value":"14px"}, "weight":{"$value":700}, "lh":{"$value":1.0},  "ls":{"$value":"1.4px"} },
+    "tag": { "size": {"$value":"10px"}, "weight":{"$value":700}, "lh":{"$value":1.2},  "ls":{"$value":"1.0px"} }
+  },
+
+  "spacing": {
+    "1":  { "$value": "5px",   "$type": "dimension" },
+    "2":  { "$value": "10px",  "$type": "dimension" },
+    "3":  { "$value": "15px",  "$type": "dimension" },
+    "4":  { "$value": "20px",  "$type": "dimension" },
+    "5":  { "$value": "24px",  "$type": "dimension" },
+    "6":  { "$value": "30px",  "$type": "dimension" },
+    "8":  { "$value": "40px",  "$type": "dimension" },
+    "10": { "$value": "50px",  "$type": "dimension" },
+    "12": { "$value": "60px",  "$type": "dimension" },
+    "16": { "$value": "80px",  "$type": "dimension" },
+    "20": { "$value": "100px", "$type": "dimension" },
+    "30": { "$value": "150px", "$type": "dimension" }
+  },
+
+  "radius": {
+    "2xs":    { "$value": "5px",    "$type": "dimension" },
+    "xs":     { "$value": "4px",    "$type": "dimension" },
+    "sm":     { "$value": "8px",    "$type": "dimension" },
+    "card":   { "$value": "10px",   "$type": "dimension" },
+    "md":     { "$value": "12px",   "$type": "dimension" },
+    "chip":   { "$value": "15px",   "$type": "dimension" },
+    "lg":     { "$value": "16px",   "$type": "dimension" },
+    "xl":     { "$value": "20px",   "$type": "dimension" },
+    "2xl":    { "$value": "30px",   "$type": "dimension" },
+    "3xl":    { "$value": "40px",   "$type": "dimension" },
+    "pill":   { "$value": "50px",   "$type": "dimension" },
+    "avatar": { "$value": "100px",  "$type": "dimension" },
+    "full":   { "$value": "1000px", "$type": "dimension" }
+  },
+
+  "blur": {
+    "weak":   { "$value": "10px", "$type": "dimension" },
+    "medium": { "$value": "30px", "$type": "dimension" },
+    "strong": { "$value": "80px", "$type": "dimension" }
+  },
+
+  "shadow": {
+    "subtle":   { "$value": "0px 2px 6px rgba(0,0,0,0.07)",       "$type": "shadow" },
+    "low":      { "$value": "0px 4px 11px rgba(0,0,0,0.15)",      "$type": "shadow" },
+    "medium":   { "$value": "0px 4px 14px rgba(0,0,0,0.25)",      "$type": "shadow" },
+    "high":     { "$value": "0px 13px 24px rgba(0,0,0,0.22)",     "$type": "shadow" },
+    "floating": { "$value": "0px 4px 25px rgba(0,0,0,0.15)",      "$type": "shadow" },
+    "modal":    { "$value": "0px 14px 24px 3px rgba(0,0,0,0.25)", "$type": "shadow" },
+    "divider":  { "$value": "0px 1px 0px rgba(0,0,0,0.3)",        "$type": "shadow" },
+    "focus":    { "$value": "0 0 0 3px rgba(0,190,255,0.4)",      "$type": "shadow" }
+  },
+
+  "duration": {
+    "instant": { "$value": "0ms",   "$type": "duration" },
+    "fast":    { "$value": "120ms", "$type": "duration" },
+    "normal":  { "$value": "200ms", "$type": "duration" },
+    "slow":    { "$value": "320ms", "$type": "duration" },
+    "slower":  { "$value": "480ms", "$type": "duration" }
+  },
+
+  "easing": {
+    "linear":  { "$value": "cubic-bezier(0, 0, 1, 1)" },
+    "in":      { "$value": "cubic-bezier(0.4, 0, 1, 1)" },
+    "out":     { "$value": "cubic-bezier(0, 0, 0.2, 1)" },
+    "default": { "$value": "cubic-bezier(0.4, 0, 0.2, 1)" },
+    "spring":  { "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)" }
+  },
+
+  "z": {
+    "base":     { "$value": 0   },
+    "dropdown": { "$value": 100 },
+    "sticky":   { "$value": 200 },
+    "overlay":  { "$value": 300 },
+    "modal":    { "$value": 400 },
+    "toast":    { "$value": 500 },
+    "tooltip":  { "$value": 600 }
+  },
+
+  "state": {
+    "disabled-opacity": { "$value": 0.4 },
+    "disabled-bg":      { "$value": "rgba(255,255,255,0.1)", "$type": "color" },
+    "selected-bg":      { "$value": "rgba(245,188,0,0.12)",  "$type": "color" },
+    "pressed-bg":       { "$value": "rgba(255,255,255,0.08)", "$type": "color" },
+    "hover-bg":         { "$value": "rgba(255,255,255,0.04)", "$type": "color" }
+  },
+
+  "elevation": {
+    "0":     { "bg": {"$value":"{color.bg.dark}"},     "shadow": {"$value":"none"} },
+    "1":     { "bg": {"$value":"{color.bg.card}"},     "shadow": {"$value":"{shadow.subtle}"} },
+    "2":     { "bg": {"$value":"{color.bg.elevated}"}, "shadow": {"$value":"{shadow.low}"} },
+    "3":     { "bg": {"$value":"{color.bg.elevated}"}, "shadow": {"$value":"{shadow.medium}"} },
+    "4":     { "bg": {"$value":"{color.bg.elevated}"}, "shadow": {"$value":"{shadow.high}"} },
+    "modal": { "bg": {"$value":"{color.bg.elevated}"}, "shadow": {"$value":"{shadow.modal}"} }
+  },
+
+  "gradient": {
+    "aurora-sky":     { "$value": "linear-gradient(225deg, #F5BC00 0%, #00BEFF 100%)" },
+    "fading-stroke":  { "$value": "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%)" },
+    "purple-glow":    { "$value": "radial-gradient(circle, rgba(127,91,255,0.5) 0%, rgba(127,91,255,0) 70%)" },
+    "yellow-pink":    { "$value": "linear-gradient(135deg, #F5BC00 0%, #FF3278 100%)" },
+    "scrim-bottom":   { "$value": "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%)" }
+  }
+}

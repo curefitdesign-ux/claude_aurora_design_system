@@ -1,0 +1,145 @@
+# Aurora Agent Recipes
+#
+# Portable component recipe library. Any AI coding agent can read this to
+# build Aurora components consistently across platforms. Keep recipes
+# platform-neutral — reference tokens by name, not by framework-specific
+# classes.
+#
+# Source of truth: design-tokens/aurora.tokens.json
+# Companion docs: TOKENS.md (token reference), CLAUDE.md (project rules)
+
+version: 1
+design_system: aurora
+non_destructive: true
+
+principles:
+  - Never hardcode hex values — always use color.* tokens.
+  - Never hardcode font families — use font.family.* tokens.
+  - Prefer semantic tokens (color.surface.*) over primitives (color.curefit.*).
+  - Use the 5px spacing rhythm (spacing.1 through spacing.30).
+  - Radius comes from radius.* (card=10, chip=15, pill=50, etc.).
+  - Shadows come from shadow.* or the elevation.* pairs.
+  - Motion: duration.* + easing.* tokens. No ad-hoc timings.
+  - Focus states use shadow.focus.
+  - Disabled states use state.disabled-opacity + state.disabled-bg.
+
+recipes:
+
+  card:
+    description: Standard content card on the dark app.
+    tokens:
+      background: color.surface.card-bg
+      radius: radius.card
+      padding: spacing.4
+      shadow: shadow.subtle
+    title:
+      text_style: text-style.h4
+      color: color.text.white
+    caption:
+      text_style: text-style.p5
+      color: color.text.muted
+
+  pill_button_primary:
+    description: ALL-CAPS pill CTA. Primary action.
+    tokens:
+      background: color.surface.action.primary
+      color: color.dark.primary
+      radius: radius.pill
+      padding_x: spacing.5
+      padding_y: spacing.3
+      text_style: text-style.cta
+    transition:
+      property: background-color
+      duration: duration.normal
+      easing: easing.default
+    pressed:
+      background: state.pressed-bg
+    disabled:
+      opacity: state.disabled-opacity
+      background: state.disabled-bg
+
+  chip:
+    description: Small tappable label.
+    tokens:
+      background: color.white-alpha.10
+      color: color.text.white
+      radius: radius.chip
+      padding_x: spacing.3
+      padding_y: spacing.2
+      text_style: text-style.p4
+    selected:
+      background: state.selected-bg
+
+  modal:
+    description: Centered modal with scrim.
+    scrim:
+      background: color.semantic.scrim
+      backdrop_blur: blur.weak
+      z: z.modal
+    sheet:
+      background: color.elevation.modal.bg
+      radius: radius.3xl  # top-only when bottom sheet
+      shadow: shadow.modal
+      z: z.modal
+    enter_motion:
+      duration: duration.slow
+      easing: easing.spring
+
+  input:
+    description: Text input on dark surface.
+    tokens:
+      background: color.bg.surface
+      color: color.text.white
+      placeholder_color: color.text.muted
+      radius: radius.md
+      padding_x: spacing.4
+      padding_y: spacing.3
+      text_style: text-style.p2
+    focused:
+      shadow: shadow.focus
+      border_color: color.semantic.focus-ring
+    disabled:
+      opacity: state.disabled-opacity
+
+  tag:
+    description: Micro label, often on images or thumbnails.
+    tokens:
+      background: color.white-alpha.20
+      color: color.text.white
+      radius: radius.sm
+      padding_x: spacing.2
+      padding_y: spacing.1
+      text_style: text-style.tag
+
+  section_heading:
+    description: Large heading above a content section.
+    tokens:
+      text_style: text-style.h1
+      color: color.text.white
+      margin_bottom: spacing.3
+
+  hero_display:
+    description: Oversized hero number / stat / marketing callout.
+    tokens:
+      text_style: text-style.h5
+      color: color.text.white
+
+anti_patterns:
+  - "Wrapping a card in an extra div just to add padding — put padding on the card itself."
+  - "Using shadow.high on cards — reserve it for sheets/modals."
+  - "Using text-style.h1 for a card title — use text-style.h4."
+  - "Bypassing the radius scale (e.g. rounded-[9px]) — pick the closest token."
+  - "Adding a new brand color — propose it in design-tokens/aurora.tokens.json first."
+
+platform_mappings:
+  web_tailwind:
+    background: "bg-[var(--color-{token})]"
+    color: "text-[var(--color-{token})]"
+    radius: "rounded-[var(--radius-{token})]"
+    spacing: "p-[var(--spacing-{token})]"
+  ios_swift:
+    access: "Aurora.color.{camelCase(token)}"
+  android_compose:
+    access: "AuroraTheme.color.{camelCase(token)}"
+  react_native:
+    import: "import { color, spacing, radius } from '@aurora/tokens'"
