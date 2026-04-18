@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Bebas+Neue&family=Caveat:wght@400;700&family=BenchNine:wght@700&family=Handlee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Bebas+Neue&family=Roboto+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -35,12 +35,17 @@
   --color-text-2: #999CA0;
   --color-text-disabled: rgba(255, 255, 255, 0.1);
 
-  /* --- Surface / Background Colors --- */
+  /* --- Surface / Background Colors ---
+     Cards are 10% translucent white + 30px backdrop-blur by default
+     (Aurora "glass card" — matches Plan Card spec from Figma).
+     Solid fallback retained as --color-bg-card-solid for opaque surfaces.
+  */
   --color-bg-dark: #1A1A1A;
-  --color-bg-card: #1C1C1E;
+  --color-bg-card: rgba(255, 255, 255, 0.10);     /* 10% white translucent */
+  --color-bg-card-solid: #1C1C1E;                 /* opaque fallback */
   --color-bg-elevated: #2C2C2C;
   --color-bg-surface: #232323;
-  --color-card-bg: #F4F0E6;
+  --card-backdrop-blur: 30px;                     /* paired with bg-card */
 
   /* --- Gray Scale --- */
   --color-gray-white: #FFFFFF;
@@ -62,15 +67,11 @@
   --color-white-40: rgba(255, 255, 255, 0.4);
   --color-white-60: rgba(255, 255, 255, 0.6);
 
-  /* --- Accent (legacy project tokens) --- */
-  --color-accent-purple: #7F5BFF;
+  /* --- Aurora accent colors (from Figma Aurora App Design System) --- */
   --color-line-gray: #B3B3B3;
-
-  /* --- Additional Accent Colors --- */
   --color-orange: #FF9700;
   --color-coral: #FF5942;
   --color-gold: #F7C744;
-  --color-blue: #3888FF;
 
   /* ============================================
      ENHANCEMENT TOKENS — Added from Global Dev Handoff
@@ -198,15 +199,16 @@
   --cta-twins-primary-bg: var(--cta-gradient-alt); /* gradient fills the button */
   --cta-twins-primary-text: #FFFFFF;
 
-  /* --- Font Families --- */
+  /* --- Font Families (Aurora App Design System only) ---
+     Aurora's official stack: Inter (primary UI), Bw Modelica SS01 (display),
+     Roboto Mono (data/code), Bebas Neue (uppercase accents).
+     Handwritten / BenchNine / Helvetica-Neue-as-heading stacks were removed —
+     they don't belong to the Aurora system and enable off-brand cards.
+  */
   --font-primary: "Inter", "Helvetica Neue", "Arial", sans-serif;
   --font-display: "Bw Modelica SS01", "Inter", sans-serif;
   --font-mono: "Roboto Mono", monospace;
   --font-bebas: "Bebas Neue", sans-serif;
-  --font-heading: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  --font-handwritten: "Caveat", "Segoe Script", cursive;
-  --font-handlee: "Handlee", "Caveat", cursive;    /* new handwritten accent */
-  --font-label: "BenchNine", "Arial Narrow", sans-serif;
 
   /* --- Typography Scale (Aurora type tokens as CSS vars) ---
      Each token exposes size, weight, line-height, letter-spacing.
@@ -348,9 +350,128 @@
   /* --- Gradient Tokens (from Handoff) --- */
   --gradient-aurora-sky: linear-gradient(225deg, #F5BC00 0%, #00BEFF 100%);
   --gradient-fading-stroke: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-  --gradient-purple-glow: radial-gradient(circle, rgba(127,91,255,0.5) 0%, rgba(127,91,255,0) 70%);
   --gradient-yellow-pink: linear-gradient(135deg, #F5BC00 0%, #FF3278 100%);
   --gradient-scrim-bottom: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+}
+
+/* ============================================
+   Aurora WHITE Theme — Light variant of the Aurora design system
+   Source: Figma Aurora App Design System (jD7tZtVeQCMRlIHN7L8umI) +
+           Figma Aurora Web Design System (2ltwLvqwn6hSKN15ZR9gxB)
+
+   Apply on <html> or <body>: <body class="theme-white">…</body>
+   Or scope to a region: <section class="theme-white">…</section>
+
+   Rules this layer preserves vs. flips:
+   - PRESERVED: brand colors (curefit yellow / pink / blue / green / coral),
+     CTA gradient (yellow → pink), status colors, aurora-bg blob hues, radii,
+     typography, spacing, motion, z-index.
+   - FLIPPED: surfaces (dark → white), text (white → ink),
+     white-alpha overlays (→ black-alpha), dividers, state bgs,
+     elevation shadows (lighter), aurora blob opacity (dialed down so it
+     remains decorative over white content).
+
+   CTA behavior on white theme:
+   - Primary: gradient bg + white text (inverted — on dark it was white bg +
+     gradient text). Keeps the brand gradient as the focal accent.
+   - Secondary: glass becomes rgba(0,0,0,0.06) + ink text.
+   - Tertiary: transparent + ink text.
+   - Twins right: unchanged — already gradient bg + white text.
+   ============================================ */
+.theme-white,
+.theme-white body,
+body.theme-white,
+html.theme-white {
+  /* --- Surfaces (dark → light) --- */
+  --color-bg-dark: #FAFAFA;                       /* app / page background */
+  --color-bg-card: rgba(255, 255, 255, 0.60);     /* 60% translucent white — stays visible over light bg, keeps the glass feel */
+  --color-bg-card-solid: #FFFFFF;                 /* opaque fallback */
+  --color-bg-elevated: #FFFFFF;                   /* sheets / modals */
+  --color-bg-surface: #F4F4F4;                    /* secondary surface */
+  --card-backdrop-blur: 30px;                     /* paired with bg-card */
+
+  /* --- Text (white → ink) --- */
+  --color-text-white: #1C1C1E;        /* primary text (on light surface) */
+  --color-text-1: #1C1C1E;
+  --color-text-2: #555555;            /* muted / Trunks equivalent */
+  --color-text-dark: #1C1C1E;
+  --color-text-disabled: rgba(0, 0, 0, 0.25);
+
+  /* --- white-alpha overlays → black-alpha on light --- */
+  --color-white-10: rgba(0, 0, 0, 0.06);
+  --color-white-20: rgba(0, 0, 0, 0.10);
+  --color-white-40: rgba(0, 0, 0, 0.25);
+  --color-white-60: rgba(0, 0, 0, 0.50);
+
+  /* --- Dividers --- */
+  --color-divider: rgba(0, 0, 0, 0.08);
+  --color-divider-light: rgba(0, 0, 0, 0.04);
+
+  /* --- Interactive states --- */
+  --state-disabled-bg: rgba(0, 0, 0, 0.06);
+  --state-pressed-bg: rgba(0, 0, 0, 0.08);
+  --state-hover-bg: rgba(0, 0, 0, 0.04);
+  --state-selected-bg: rgba(245, 188, 0, 0.16);
+
+  /* --- Aurora animated blobs — dialed down for legibility on white --- */
+  --aurora-bg-blob-opacity: 0.20;
+
+  /* --- Shadows (darker on white = more visible; soften alpha) --- */
+  --shadow-subtle: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-low: 0px 4px 11px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0px 4px 14px rgba(0, 0, 0, 0.10);
+  --shadow-high: 0px 13px 24px rgba(0, 0, 0, 0.12);
+  --shadow-floating: 0px 4px 25px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0px 14px 24px 3px rgba(0, 0, 0, 0.16);
+  --shadow-divider: 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+  /* --- Elevation pairs --- */
+  --elevation-0-bg: #FAFAFA;
+  --elevation-1-bg: #FFFFFF;
+  --elevation-1-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  --elevation-2-bg: #FFFFFF;
+  --elevation-2-shadow: 0px 4px 11px rgba(0, 0, 0, 0.08);
+  --elevation-3-bg: #FFFFFF;
+  --elevation-3-shadow: 0px 4px 14px rgba(0, 0, 0, 0.10);
+  --elevation-4-bg: #FFFFFF;
+  --elevation-4-shadow: 0px 13px 24px rgba(0, 0, 0, 0.12);
+  --elevation-modal-bg: #FFFFFF;
+  --elevation-modal-shadow: 0px 14px 24px 3px rgba(0, 0, 0, 0.16);
+
+  /* --- CTA Primary on white: invert — gradient bg, white text --- */
+  --cta-primary-bg: var(--cta-gradient);
+  --cta-primary-text: #FFFFFF;
+  --cta-primary-disabled-bg: rgba(0, 0, 0, 0.06);
+  --cta-primary-disabled-text: rgba(0, 0, 0, 0.30);
+
+  /* --- CTA Secondary on white: glass black tint --- */
+  --cta-secondary-bg: rgba(0, 0, 0, 0.06);
+  --cta-secondary-text: #1C1C1E;
+  --cta-secondary-disabled-bg: rgba(0, 0, 0, 0.04);
+  --cta-secondary-disabled-text: rgba(0, 0, 0, 0.30);
+  --cta-secondary-booked-bg: rgba(15, 228, 152, 0.15);
+  --cta-secondary-booked-text: #066543;
+  --cta-secondary-waitlist-bg: rgba(0, 0, 0, 0.06);
+  --cta-secondary-waitlist-text: rgba(0, 0, 0, 0.50);
+  --cta-secondary-waitlisted-bg: rgba(15, 228, 152, 0.15);
+  --cta-secondary-full-bg: rgba(0, 0, 0, 0.04);
+  --cta-secondary-full-text: rgba(0, 0, 0, 0.40);
+  --cta-secondary-negative-bg: rgba(255, 89, 66, 0.10);
+  --cta-secondary-negative-text: #FF5942;
+
+  /* --- CTA Tertiary on white: ink text --- */
+  --cta-tertiary-text: #1C1C1E;
+
+  /* --- Scrim & overlay stay dark (they sit above content regardless of theme) --- */
+  /* --color-scrim, --color-overlay: unchanged */
+}
+
+/* When the white theme is active on html/body, ensure the page itself paints
+   from the themed tokens (body rule below already reads these vars). */
+html.theme-white,
+body.theme-white {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-white);
 }
 
 body {
@@ -420,6 +541,34 @@ body::after {
   position: relative;
   overflow: hidden;
   isolation: isolate;
+}
+
+/* ============================================
+   Aurora Card — default card surface
+   10% white translucent + 30px backdrop blur in dark theme,
+   60% white translucent + 30px backdrop blur in white theme.
+   Use <div class="aurora-card"> for any card surface.
+   Pairs with --color-bg-card + --card-backdrop-blur tokens.
+   ============================================ */
+.aurora-card {
+  background-color: var(--color-bg-card);
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.theme-white .aurora-card,
+body.theme-white .aurora-card {
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Any element using the bg-bg-card Tailwind utility also gets the blur
+   automatically, so existing components don't need edits. */
+[class*="bg-bg-card"],
+.bg-\[var\(--color-bg-card\)\] {
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
 }
 
 .aurora-bg > .aurora-bg-blob--pink {
