@@ -1,0 +1,25 @@
+/* ============================================================
+   Aurora — Card component
+   Default surface: 10% white translucent + 30px backdrop blur.
+   Matches Plan Card spec from Figma Aurora App DS.
+   ============================================================ */
+.aurora-card {
+  background-color: var(--color-bg-card);
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.theme-white .aurora-card,
+body.theme-white .aurora-card {
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Legacy ergonomics: any element using bg-bg-card also gets the blur,
+   so existing components don't need edits. */
+[class*="bg-bg-card"],
+.bg-\[var\(--color-bg-card\)\] {
+  backdrop-filter: blur(var(--card-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
+}

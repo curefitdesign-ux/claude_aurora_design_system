@@ -1,0 +1,54 @@
+/* ============================================================
+   Aurora — PRIMITIVE tokens (Tier 1)
+   Raw brand colors. No semantic meaning. Never consume these
+   directly in components — alias via semantics.css instead.
+   Source: Figma Aurora App Design System (jD7tZtVeQCMRlIHN7L8umI)
+   ============================================================ */
+@theme {
+  /* --- Brand colors (Curefit) --- */
+  --color-curefit-yellow: #F5BC00;
+  --color-curefit-yellow-light: #FFDC18;
+  --color-curefit-pink: #FF3278;
+  --color-curefit-blue: #00BEFF;
+  --color-curefit-green: #0FE498;
+
+  /* --- Aurora accent palette --- */
+  --color-coral: #FF5942;      /* CTA accent */
+  --color-gold: #F7C744;       /* waitlist badge */
+  --color-orange: #FF9700;
+  --color-line-gray: #B3B3B3;
+
+  /* --- Neutral scale (dark-to-light) --- */
+  --color-dark-ink: #141515;
+  --color-dark-primary: #1C1C1E;
+  --color-dark-secondary: #2C2C2C;
+  --color-dark-action: #333333;
+  --color-light-action: #F0F0F0;
+  --color-light-primary: #FFFFFF;
+
+  /* --- Gray scale --- */
+  --color-gray-white: #FFFFFF;
+  --color-gray-50: #F7F7F7;
+  --color-gray-100: #F0F0F0;
+  --color-gray-200: #E0E0E0;
+  --color-gray-300: #D9D9D9;
+  --color-gray-400: #C4C4C4;
+  --color-gray-500: #999CA0;
+  --color-gray-600: #808080;
+  --color-gray-700: #666666;
+  --color-gray-800: #434343;
+  --color-gray-900: #2C2C2C;
+  --color-gray-dark: #1C1C1E;
+
+  /* --- White-alpha overlays --- */
+  --color-white-10: rgba(255, 255, 255, 0.10);
+  --color-white-20: rgba(255, 255, 255, 0.20);
+  --color-white-40: rgba(255, 255, 255, 0.40);
+  --color-white-60: rgba(255, 255, 255, 0.60);
+
+  /* --- Status colors --- */
+  --color-status-positive: #4AB74A;
+  --color-status-negative: #B00020;
+  --color-status-alert: #F5BC00;
+  --color-status-neutral: #00BEFF;
+}

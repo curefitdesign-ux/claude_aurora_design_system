@@ -1,0 +1,115 @@
+/* ============================================================
+   Aurora — Animated background (three drifting blurred blobs)
+   Applied globally via body::before, body::after, #root::before.
+   Use .aurora-bg on a container to scope it locally instead.
+   Respects prefers-reduced-motion.
+   ============================================================ */
+@theme {
+  --aurora-bg-blob-pink: #FF3278;
+  --aurora-bg-blob-yellow: #F5BC00;
+  --aurora-bg-blob-blue: #00BEFF;
+  --aurora-bg-blob-opacity: 0.35;
+  --aurora-bg-blob-size: 45vw;
+  --aurora-bg-blob-blur: var(--blur-3xl);
+  --aurora-bg-duration-pink: 24s;
+  --aurora-bg-duration-yellow: 32s;
+  --aurora-bg-duration-blue: 28s;
+  --aurora-bg-easing: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+body::before,
+body::after,
+.aurora-bg-blob {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--aurora-bg-blob-size);
+  height: var(--aurora-bg-blob-size);
+  border-radius: 50%;
+  filter: blur(var(--aurora-bg-blob-blur));
+  opacity: var(--aurora-bg-blob-opacity);
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+}
+
+/* Pink blob — top-left drift */
+body::before {
+  background: var(--aurora-bg-blob-pink);
+  animation: aurora-drift-pink var(--aurora-bg-duration-pink) var(--aurora-bg-easing) infinite;
+}
+
+/* Yellow blob — bottom-right, offset phase */
+body::after {
+  background: var(--aurora-bg-blob-yellow);
+  animation: aurora-drift-yellow var(--aurora-bg-duration-yellow) var(--aurora-bg-easing) infinite;
+  animation-delay: -8s;
+}
+
+/* Blue blob — attached to #root so all three render globally */
+#root::before {
+  content: "";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: var(--aurora-bg-blob-size);
+  height: var(--aurora-bg-blob-size);
+  border-radius: 50%;
+  filter: blur(var(--aurora-bg-blob-blur));
+  opacity: var(--aurora-bg-blob-opacity);
+  background: var(--aurora-bg-blob-blue);
+  animation: aurora-drift-blue var(--aurora-bg-duration-blue) var(--aurora-bg-easing) infinite;
+  animation-delay: -14s;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Scoped variant */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.aurora-bg > .aurora-bg-blob--pink {
+  background: var(--aurora-bg-blob-pink);
+  animation: aurora-drift-pink var(--aurora-bg-duration-pink) var(--aurora-bg-easing) infinite;
+}
+.aurora-bg > .aurora-bg-blob--yellow {
+  background: var(--aurora-bg-blob-yellow);
+  animation: aurora-drift-yellow var(--aurora-bg-duration-yellow) var(--aurora-bg-easing) infinite;
+  animation-delay: -8s;
+}
+.aurora-bg > .aurora-bg-blob--blue {
+  background: var(--aurora-bg-blob-blue);
+  animation: aurora-drift-blue var(--aurora-bg-duration-blue) var(--aurora-bg-easing) infinite;
+  animation-delay: -14s;
+}
+
+@keyframes aurora-drift-pink {
+  0%   { transform: translate(-50%, -50%) translate(-30vw, -25vh); }
+  33%  { transform: translate(-50%, -50%) translate( 20vw, -10vh); }
+  66%  { transform: translate(-50%, -50%) translate( -5vw,  20vh); }
+  100% { transform: translate(-50%, -50%) translate(-30vw, -25vh); }
+}
+@keyframes aurora-drift-yellow {
+  0%   { transform: translate(-50%, -50%) translate( 25vw,  20vh); }
+  33%  { transform: translate(-50%, -50%) translate(-20vw,  10vh); }
+  66%  { transform: translate(-50%, -50%) translate( 10vw, -25vh); }
+  100% { transform: translate(-50%, -50%) translate( 25vw,  20vh); }
+}
+@keyframes aurora-drift-blue {
+  0%   { transform: translate(-50%, -50%) translate(  0vw,  25vh); }
+  33%  { transform: translate(-50%, -50%) translate( 25vw, -15vh); }
+  66%  { transform: translate(-50%, -50%) translate(-25vw,   5vh); }
+  100% { transform: translate(-50%, -50%) translate(  0vw,  25vh); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after,
+  #root::before,
+  .aurora-bg-blob {
+    animation: none !important;
+  }
+}

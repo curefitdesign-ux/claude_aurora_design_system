@@ -1,0 +1,37 @@
+/* ============================================================
+   Aurora — Typography tokens
+   Fonts + type scale. Aurora-only stack (Inter / Bw Modelica /
+   Roboto Mono / Bebas Neue). No handwritten / label stacks.
+   ============================================================ */
+@theme {
+  /* --- Font families --- */
+  --font-primary: "Inter", "Helvetica Neue", "Arial", sans-serif;
+  --font-display: "Bw Modelica SS01", "Inter", sans-serif;
+  --font-mono: "Roboto Mono", monospace;
+  --font-bebas: "Bebas Neue", sans-serif;
+
+  /* --- Headings --- */
+  --text-h1-size: 20px;   --text-h1-weight: 700; --text-h1-lh: 1.4;  --text-h1-ls: -0.2px;
+  --text-h2-size: 18px;   --text-h2-weight: 700; --text-h2-lh: 1.4;  --text-h2-ls: -0.2px;
+  --text-h3-size: 18px;   --text-h3-weight: 500; --text-h3-lh: 1.4;  --text-h3-ls: -0.2px;
+  --text-h4-size: 16px;   --text-h4-weight: 700; --text-h4-lh: 1.4;  --text-h4-ls: -0.1px;
+  --text-h5-size: 50px;   --text-h5-weight: 900; --text-h5-lh: 1.0;  --text-h5-ls: -2.5px;
+  --text-h7-size: 38px;   --text-h7-weight: 900; --text-h7-lh: 1.05; --text-h7-ls: -1.6px;
+  --text-h8-size: 35px;   --text-h8-weight: 500; --text-h8-lh: 1.1;  --text-h8-ls: -1.0px;
+  --text-h9-size: 24px;   --text-h9-weight: 800; --text-h9-lh: 1.2;  --text-h9-ls: -0.5px;
+  --text-h10-size: 30px;  --text-h10-weight: 700; --text-h10-lh: 1.15;--text-h10-ls: -0.8px;
+
+  /* --- Body / paragraph --- */
+  --text-p1-size: 16px;   --text-p1-weight: 500; --text-p1-lh: 1.5; --text-p1-ls: 0;
+  --text-p2-size: 16px;   --text-p2-weight: 400; --text-p2-lh: 1.5; --text-p2-ls: 0;
+  --text-p3-size: 14px;   --text-p3-weight: 700; --text-p3-lh: 1.5; --text-p3-ls: 0;
+  --text-p4-size: 14px;   --text-p4-weight: 500; --text-p4-lh: 1.5; --text-p4-ls: 0;
+  --text-p5-size: 14px;   --text-p5-weight: 400; --text-p5-lh: 1.5; --text-p5-ls: 0;
+  --text-p6-size: 12px;   --text-p6-weight: 700; --text-p6-lh: 1.4; --text-p6-ls: 2.4px;  /* ALL CAPS label */
+  --text-p8-size: 12px;   --text-p8-weight: 400; --text-p8-lh: 1.4; --text-p8-ls: 0;
+  --text-p10-size: 10px;  --text-p10-weight: 400; --text-p10-lh: 1.3;--text-p10-ls: 0;
+
+  /* --- CTA + tag --- */
+  --text-cta-size: 14px;  --text-cta-weight: 700; --text-cta-lh: 1.0; --text-cta-ls: 1.4px;
+  --text-tag-size: 10px;  --text-tag-weight: 700; --text-tag-lh: 1.2; --text-tag-ls: 1.0px;
+}

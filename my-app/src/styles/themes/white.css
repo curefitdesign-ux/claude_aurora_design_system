@@ -1,0 +1,92 @@
+/* ============================================================
+   Aurora — WHITE theme (light variant)
+   Apply <body class="theme-white"> or scope with .theme-white on
+   any container. Flips surfaces / text / shadows while preserving
+   brand colors, gradient, typography, spacing, aurora-bg blobs.
+   ============================================================ */
+.theme-white,
+.theme-white body,
+body.theme-white,
+html.theme-white {
+  /* --- Surfaces --- */
+  --color-bg-dark: #FAFAFA;
+  --color-bg-card: rgba(255, 255, 255, 0.60);
+  --color-bg-card-solid: #FFFFFF;
+  --color-bg-elevated: #FFFFFF;
+  --color-bg-surface: #F4F4F4;
+  --card-backdrop-blur: 30px;
+
+  /* --- Text (white → ink) --- */
+  --color-text-white: #1C1C1E;
+  --color-text-1: #1C1C1E;
+  --color-text-2: #555555;
+  --color-text-dark: #1C1C1E;
+  --color-text-disabled: rgba(0, 0, 0, 0.25);
+
+  /* --- white-alpha → black-alpha --- */
+  --color-white-10: rgba(0, 0, 0, 0.06);
+  --color-white-20: rgba(0, 0, 0, 0.10);
+  --color-white-40: rgba(0, 0, 0, 0.25);
+  --color-white-60: rgba(0, 0, 0, 0.50);
+
+  /* --- Dividers / states --- */
+  --color-divider: rgba(0, 0, 0, 0.08);
+  --color-divider-light: rgba(0, 0, 0, 0.04);
+  --state-disabled-bg: rgba(0, 0, 0, 0.06);
+  --state-pressed-bg: rgba(0, 0, 0, 0.08);
+  --state-hover-bg: rgba(0, 0, 0, 0.04);
+  --state-selected-bg: rgba(245, 188, 0, 0.16);
+
+  /* --- Aurora blob opacity dialed down --- */
+  --aurora-bg-blob-opacity: 0.20;
+
+  /* --- Shadows softened --- */
+  --shadow-subtle: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  --shadow-low: 0px 4px 11px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0px 4px 14px rgba(0, 0, 0, 0.10);
+  --shadow-high: 0px 13px 24px rgba(0, 0, 0, 0.12);
+  --shadow-floating: 0px 4px 25px rgba(0, 0, 0, 0.10);
+  --shadow-modal: 0px 14px 24px 3px rgba(0, 0, 0, 0.16);
+  --shadow-divider: 0px 1px 0px rgba(0, 0, 0, 0.08);
+
+  /* --- Elevation --- */
+  --elevation-0-bg: #FAFAFA;
+  --elevation-1-bg: #FFFFFF;
+  --elevation-1-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+  --elevation-2-bg: #FFFFFF;
+  --elevation-2-shadow: 0px 4px 11px rgba(0, 0, 0, 0.08);
+  --elevation-3-bg: #FFFFFF;
+  --elevation-3-shadow: 0px 4px 14px rgba(0, 0, 0, 0.10);
+  --elevation-4-bg: #FFFFFF;
+  --elevation-4-shadow: 0px 13px 24px rgba(0, 0, 0, 0.12);
+  --elevation-modal-bg: #FFFFFF;
+  --elevation-modal-shadow: 0px 14px 24px 3px rgba(0, 0, 0, 0.16);
+
+  /* --- CTA overrides for white theme --- */
+  --cta-primary-bg: var(--cta-gradient);
+  --cta-primary-text: #FFFFFF;
+  --cta-primary-disabled-bg: rgba(0, 0, 0, 0.06);
+  --cta-primary-disabled-text: rgba(0, 0, 0, 0.30);
+
+  --cta-secondary-bg: rgba(0, 0, 0, 0.06);
+  --cta-secondary-text: #1C1C1E;
+  --cta-secondary-disabled-bg: rgba(0, 0, 0, 0.04);
+  --cta-secondary-disabled-text: rgba(0, 0, 0, 0.30);
+  --cta-secondary-booked-bg: rgba(15, 228, 152, 0.15);
+  --cta-secondary-booked-text: #066543;
+  --cta-secondary-waitlist-bg: rgba(0, 0, 0, 0.06);
+  --cta-secondary-waitlist-text: rgba(0, 0, 0, 0.50);
+  --cta-secondary-waitlisted-bg: rgba(15, 228, 152, 0.15);
+  --cta-secondary-full-bg: rgba(0, 0, 0, 0.04);
+  --cta-secondary-full-text: rgba(0, 0, 0, 0.40);
+  --cta-secondary-negative-bg: rgba(255, 89, 66, 0.10);
+  --cta-secondary-negative-text: #FF5942;
+
+  --cta-tertiary-text: #1C1C1E;
+}
+
+html.theme-white,
+body.theme-white {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-white);
+}

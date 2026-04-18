@@ -1,0 +1,271 @@
+/* ============================================================
+   Aurora — CTA System (Tier 3 component tokens + utilities)
+   Source: Figma Aurora App Design System (jD7tZtVeQCMRlIHN7L8umI),
+           Buttons page.
+
+   THE RULE (non-negotiable):
+   - 4 levels only: primary / secondary / tertiary / twins
+   - Typography: Inter 700, 14px (lg) / 12px (sm),
+     letter-spacing 0.5px, text-transform UPPERCASE
+   - Primary (dark theme): white bg, gradient text (yellow→pink)
+   - Primary (white theme): gradient bg, white text
+   - Secondary: glass (10% white / 30px blur), white text
+   - Tertiary: transparent + white text, 50px blur optional
+   - Twins: row of Secondary (left) + Primary-gradient (right)
+
+   Agents: use the .aurora-cta utility classes below — they bake
+   uppercase + tracking + font-weight from tokens so you cannot
+   skip the rules by forgetting a Tailwind utility.
+   ============================================================ */
+@theme {
+  /* --- Gradient (Aurora "King CTA Text • Coloured") --- */
+  --cta-gradient: linear-gradient(135deg, #FFDB17 0%, #FF3278 100%);
+  --cta-gradient-alt: linear-gradient(81deg, #FFDB17 0%, #FF3278 100%);
+
+  /* --- Shared typography --- */
+  --cta-font-family: var(--font-primary);
+  --cta-font-weight: 700;
+  --cta-font-size-lg: 14px;
+  --cta-font-size-sm: 12px;
+  --cta-letter-spacing-lg: 0.5px;
+  --cta-letter-spacing-sm: 0.5px;
+  --cta-text-transform: uppercase;
+
+  /* --- Primary --- */
+  --cta-primary-bg: #FFFFFF;
+  --cta-primary-text-gradient: var(--cta-gradient);
+  --cta-primary-backdrop-blur: 27px;
+  --cta-primary-radius: 5px;
+  --cta-primary-height-lg: 50px;
+  --cta-primary-height-sm: 40px;
+  --cta-primary-max-width: 335px;
+  --cta-primary-padding-x-lg: 20px;
+  --cta-primary-padding-y-lg: 15px;
+  --cta-primary-padding-x-sm: 20px;
+  --cta-primary-padding-y-sm: 10px;
+  --cta-primary-gap: 5px;
+  --cta-primary-disabled-bg: rgba(255, 255, 255, 0.10);
+  --cta-primary-disabled-text: rgba(255, 255, 255, 0.20);
+  --cta-primary-disabled-blur: 30px;
+
+  /* --- Secondary (glass) --- */
+  --cta-secondary-bg: rgba(255, 255, 255, 0.10);
+  --cta-secondary-backdrop-blur: 30px;
+  --cta-secondary-text: #FFFFFF;
+  --cta-secondary-radius: 5px;
+  --cta-secondary-height-lg: 40px;
+  --cta-secondary-height-sm: 30px;
+  --cta-secondary-padding-x-lg: 20px;
+  --cta-secondary-padding-y-lg: 10px;
+  --cta-secondary-padding-x-sm: 15px;
+  --cta-secondary-padding-y-sm: 7px;
+  --cta-secondary-font-size-lg: 14px;
+  --cta-secondary-font-size-sm: 12px;
+  --cta-secondary-disabled-bg: rgba(255, 255, 255, 0.10);
+  --cta-secondary-disabled-text: rgba(255, 255, 255, 0.20);
+  --cta-secondary-booked-bg: rgba(15, 228, 152, 0.20);
+  --cta-secondary-booked-text: #FFFFFF;
+  --cta-secondary-booked-icon: #0FE498;
+  --cta-secondary-waitlist-bg: rgba(255, 255, 255, 0.20);
+  --cta-secondary-waitlist-badge: #F7C744;
+  --cta-secondary-waitlist-text: rgba(255, 255, 255, 0.40);
+  --cta-secondary-waitlisted-bg: rgba(15, 228, 152, 0.20);
+  --cta-secondary-waitlisted-badge: #0FE498;
+  --cta-secondary-full-bg: rgba(255, 255, 255, 0.10);
+  --cta-secondary-full-text: rgba(255, 255, 255, 0.40);
+  --cta-secondary-negative-bg: rgba(255, 89, 66, 0.10);
+  --cta-secondary-negative-text: #FF5942;
+
+  /* --- Tertiary --- */
+  --cta-tertiary-bg: transparent;
+  --cta-tertiary-text: #FFFFFF;
+  --cta-tertiary-backdrop-blur: 50px;
+  --cta-tertiary-radius: 5px;
+  --cta-tertiary-height-lg: 40px;
+  --cta-tertiary-height-sm: 30px;
+  --cta-tertiary-font-size-lg: 14px;
+  --cta-tertiary-font-size-sm: 12px;
+  --cta-tertiary-letter-spacing: 0.5px;
+  --cta-tertiary-padding-x-lg: 20px;
+  --cta-tertiary-padding-y-lg: 11px;
+  --cta-tertiary-padding-x-sm: 15px;
+  --cta-tertiary-padding-y-sm: 7px;
+  --cta-tertiary-disabled-opacity: 0.20;
+
+  /* --- Twins (double-CTA row) --- */
+  --cta-twins-gap: 10px;
+  --cta-twins-padding-x: 20px;
+  --cta-twins-height-lg: 50px;
+  --cta-twins-height-sm: 40px;
+  --cta-twins-primary-bg: var(--cta-gradient-alt);
+  --cta-twins-primary-text: #FFFFFF;
+}
+
+/* ============================================================
+   Enforcement utility classes
+   ============================================================ */
+
+/* Shared base — typography, layout, transition.
+   Uppercase + tracking + weight are baked in so the rule can't
+   be skipped by forgetting a Tailwind utility. */
+.aurora-cta {
+  font-family: var(--cta-font-family);
+  font-weight: var(--cta-font-weight);
+  font-size: var(--cta-font-size-lg);
+  letter-spacing: var(--cta-letter-spacing-lg);
+  text-transform: var(--cta-text-transform);   /* ALL CAPS — always */
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--cta-primary-gap);
+  cursor: pointer;
+  border: 0;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    background-color var(--duration-normal) var(--easing-default),
+    color var(--duration-normal) var(--easing-default),
+    opacity var(--duration-normal) var(--easing-default);
+}
+.aurora-cta:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+.aurora-cta[disabled],
+.aurora-cta[aria-disabled="true"] {
+  pointer-events: none;
+}
+
+/* Size modifier */
+.aurora-cta--sm {
+  font-size: var(--cta-font-size-sm);
+  letter-spacing: var(--cta-letter-spacing-sm);
+}
+
+/* --- Primary (dark theme default — white bg, gradient text) --- */
+.aurora-cta--primary {
+  background-color: var(--cta-primary-bg);
+  color: transparent;
+  background-image: var(--cta-primary-text-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  height: var(--cta-primary-height-lg);
+  padding: var(--cta-primary-padding-y-lg) var(--cta-primary-padding-x-lg);
+  min-width: 120px;
+  max-width: var(--cta-primary-max-width);
+  border-radius: var(--cta-primary-radius);
+  /* The bg-color fill below is a second layer — Safari needs both */
+  background-origin: padding-box, border-box;
+}
+/* When .theme-white is active, primary flips to gradient bg + white text */
+.theme-white .aurora-cta--primary,
+body.theme-white .aurora-cta--primary {
+  background-image: var(--cta-gradient);
+  background-color: transparent;
+  color: #FFFFFF;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+.aurora-cta--primary.aurora-cta--sm {
+  height: var(--cta-primary-height-sm);
+  padding: var(--cta-primary-padding-y-sm) var(--cta-primary-padding-x-sm);
+}
+.aurora-cta--primary[disabled],
+.aurora-cta--primary[aria-disabled="true"] {
+  background-image: none;
+  background-color: var(--cta-primary-disabled-bg);
+  color: var(--cta-primary-disabled-text);
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}
+
+/* --- Secondary (glass) --- */
+.aurora-cta--secondary {
+  background-color: var(--cta-secondary-bg);
+  backdrop-filter: blur(var(--cta-secondary-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--cta-secondary-backdrop-blur));
+  color: var(--cta-secondary-text);
+  height: var(--cta-secondary-height-lg);
+  padding: var(--cta-secondary-padding-y-lg) var(--cta-secondary-padding-x-lg);
+  min-width: 120px;
+  border-radius: var(--cta-secondary-radius);
+}
+.aurora-cta--secondary.aurora-cta--sm {
+  height: var(--cta-secondary-height-sm);
+  padding: var(--cta-secondary-padding-y-sm) var(--cta-secondary-padding-x-sm);
+}
+.aurora-cta--secondary[disabled],
+.aurora-cta--secondary[aria-disabled="true"] {
+  background-color: var(--cta-secondary-disabled-bg);
+  color: var(--cta-secondary-disabled-text);
+}
+
+/* --- Secondary state variants --- */
+.aurora-cta--secondary.is-booked {
+  background-color: var(--cta-secondary-booked-bg);
+  color: var(--cta-secondary-booked-text);
+}
+.aurora-cta--secondary.is-waitlist {
+  background-color: var(--cta-secondary-waitlist-bg);
+  color: var(--cta-secondary-waitlist-badge);
+}
+.aurora-cta--secondary.is-waitlisted {
+  background-color: var(--cta-secondary-waitlisted-bg);
+  color: var(--cta-secondary-waitlisted-badge);
+}
+.aurora-cta--secondary.is-full {
+  background-color: var(--cta-secondary-full-bg);
+  color: var(--cta-secondary-full-text);
+}
+.aurora-cta--secondary.is-negative {
+  background-color: var(--cta-secondary-negative-bg);
+  color: var(--cta-secondary-negative-text);
+}
+
+/* --- Tertiary --- */
+.aurora-cta--tertiary {
+  background-color: var(--cta-tertiary-bg);
+  backdrop-filter: blur(var(--cta-tertiary-backdrop-blur));
+  -webkit-backdrop-filter: blur(var(--cta-tertiary-backdrop-blur));
+  color: var(--cta-tertiary-text);
+  height: var(--cta-tertiary-height-lg);
+  padding: var(--cta-tertiary-padding-y-lg) var(--cta-tertiary-padding-x-lg);
+  border-radius: var(--cta-tertiary-radius);
+}
+.aurora-cta--tertiary.aurora-cta--sm {
+  height: var(--cta-tertiary-height-sm);
+  padding: var(--cta-tertiary-padding-y-sm) var(--cta-tertiary-padding-x-sm);
+}
+.aurora-cta--tertiary[disabled],
+.aurora-cta--tertiary[aria-disabled="true"] {
+  opacity: var(--cta-tertiary-disabled-opacity);
+}
+.theme-white .aurora-cta--tertiary,
+body.theme-white .aurora-cta--tertiary {
+  color: var(--cta-tertiary-text, #1C1C1E);
+}
+
+/* --- Twins container --- */
+.aurora-cta-twins {
+  display: flex;
+  gap: var(--cta-twins-gap);
+  padding: 0 var(--cta-twins-padding-x);
+  width: 100%;
+}
+.aurora-cta-twins > .aurora-cta {
+  flex: 1 1 0;
+  min-width: 135px;
+  height: var(--cta-twins-height-lg);
+}
+.aurora-cta-twins.aurora-cta--sm > .aurora-cta {
+  height: var(--cta-twins-height-sm);
+}
+/* Twins right side — gradient bg + white text (opposite of standalone primary) */
+.aurora-cta-twins > .aurora-cta--primary {
+  background-image: var(--cta-twins-primary-bg);
+  background-color: transparent;
+  color: var(--cta-twins-primary-text);
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+}

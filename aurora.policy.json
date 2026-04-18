@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": 1,
+  "design_system": "aurora",
+  "source_of_truth": [
+    "design-tokens/aurora.tokens.json",
+    "my-app/src/styles/**/*.css"
+  ],
+  "figma_sources": {
+    "app":  "jD7tZtVeQCMRlIHN7L8umI",
+    "web":  "2ltwLvqwn6hSKN15ZR9gxB"
+  },
+
+  "allowed_fonts": [
+    "Inter",
+    "Bw Modelica SS01",
+    "Roboto Mono",
+    "Bebas Neue"
+  ],
+  "forbidden_fonts": [
+    "Caveat",
+    "Handlee",
+    "BenchNine",
+    "Helvetica Neue",
+    "Segoe Script",
+    "Comic Sans",
+    "Arial Narrow"
+  ],
+
+  "brand_colors": {
+    "curefit-yellow": "#F5BC00",
+    "curefit-yellow-light": "#FFDC18",
+    "curefit-pink": "#FF3278",
+    "curefit-blue": "#00BEFF",
+    "curefit-green": "#0FE498",
+    "coral": "#FF5942",
+    "gold": "#F7C744"
+  },
+  "forbidden_hex_in_components": [
+    "#F4F0E6",
+    "#7F5BFF",
+    "#3888FF"
+  ],
+
+  "cta": {
+    "levels": ["primary", "secondary", "tertiary", "twins"],
+    "text_transform": "uppercase",
+    "letter_spacing_px": 0.5,
+    "font_weight": 700,
+    "font_family": "Inter",
+    "allowed_utility_classes": [
+      "aurora-cta",
+      "aurora-cta--primary",
+      "aurora-cta--secondary",
+      "aurora-cta--tertiary",
+      "aurora-cta-twins",
+      "aurora-cta--sm"
+    ],
+    "forbidden_bg_tokens": [
+      "color-curefit-yellow",
+      "color-curefit-blue",
+      "color-curefit-green",
+      "color-curefit-pink"
+    ]
+  },
+
+  "card": {
+    "default_bg": "rgba(255, 255, 255, 0.10)",
+    "default_backdrop_blur": "30px",
+    "radius_token": "radius-card"
+  },
+
+  "rules": [
+    "Components must not embed raw hex; use var(--color-*) or var(--cta-*) tokens.",
+    "CTAs must render their label via .aurora-cta utility (text-transform:uppercase baked in) — no <button class=\"bg-curefit-yellow\">.",
+    "No spacing off the 5px rhythm. No px radius outside the radius scale.",
+    "Motion uses --duration-* + --easing-* tokens.",
+    "Fonts limited to allowed_fonts; forbidden_fonts must not appear in imports or font-family.",
+    "Every pixel decision traces to a Figma source (app or web)."
+  ]
+}

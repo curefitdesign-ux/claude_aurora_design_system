@@ -6,68 +6,69 @@ The portable, AI-ready version of the **Aurora** design system (Curefit). Single
 
 ```
 .
+├── CLAUDE.md                        rules for AI coding agents
+├── TOKENS.md                        token reference + CTA usage
+├── aurora.policy.json               machine-readable allow/deny
+├── aurora.agent.yaml                portable component recipes
+├── aurora.flat.json                 flat key→value dump
 ├── design-tokens/
-│   ├── aurora.tokens.json      # W3C DTCG source of truth
-│   └── .baseline/              # frozen snapshot for drift detection
-├── my-app/                     # reference React + Tailwind v4 app
-│   └── src/
-│       ├── index.css           # Aurora tokens in @theme block
-│       └── components/ui/      # reference component implementations
-├── TOKENS.md                   # agent-facing token reference
-├── aurora.agent.yaml           # portable component recipes
-├── aurora.flat.json            # 213 resolved tokens, flat key/value
-└── CLAUDE.md                   # project conventions + Agent Prompt Guide
+│   └── aurora.tokens.json           W3C DTCG source of truth
+├── scripts/
+│   └── check-aurora.mjs             compliance linter
+└── my-app/                          reference React + Tailwind v4 app
+    └── src/
+        ├── index.css                imports all style layers in order
+        └── styles/
+            ├── tokens/              primitives · semantics · typography · spacing · motion
+            ├── components/          cta · card · aurora-bg (tokens + utilities)
+            └── themes/              white.css (.theme-white)
 ```
 
-## Consuming Aurora from an AI agent (Codex, Cursor, Claude Code, Copilot)
+## How AI agents consume Aurora
 
-Any agent looking at this repo picks up:
+Any agent (Codex, Cursor, Claude Code, Copilot) picks up:
 
-1. **`TOKENS.md`** — when to use each token, when not to, one-line examples.
-2. **`aurora.agent.yaml`** — structured recipes (card, pill button, chip, modal…).
-3. **`aurora.flat.json`** — machine-readable; 213 fully-resolved tokens.
+1. **`CLAUDE.md`** — binding rules
+2. **`TOKENS.md`** — token reference + CTA usage examples
+3. **`aurora.policy.json`** — machine-readable allow/deny
+4. **`aurora.agent.yaml`** — portable component recipes
+5. **`aurora.flat.json`** — 213+ resolved tokens
 
-Drop these three files at the root of any project that needs Aurora and AI suggestions will use the right tokens.
+Drop these five files + `design-tokens/` into any project and AI suggestions will use only Aurora tokens.
 
-## Consuming Aurora from web
-
-The reference implementation lives in `my-app/`:
+## How the web reference app consumes Aurora
 
 ```bash
 cd my-app
 npm install
 npm run dev
+npm run aurora:check      # gate on token compliance
 ```
 
-Aurora tokens are in `src/index.css` inside the Tailwind v4 `@theme` block — use Tailwind utility classes (`bg-curefit-yellow`, `text-text-muted`, `rounded-[var(--radius-card)]`) directly.
+Tokens live in `src/styles/tokens/` inside Tailwind v4 `@theme` blocks. Use the `.aurora-cta`, `.aurora-card`, `.aurora-bg` utility classes or reference the tokens directly via `var(--…)`.
 
-## Non-destructive by design
+## Themes
 
-This repo follows a single invariant: **no visual changes without explicit approval.**
+Default is dark. To switch to light:
 
-- `design-tokens/.baseline/index.css.frozen` is the byte-exact ground truth.
-- Any PR that regenerates `my-app/src/index.css` must produce a byte-identical diff against the baseline, or be tagged with an approved visual change.
-- The guardrail workflow in `.github/workflows/` (optional) enforces this in CI.
-
-## Platform adapters
-
-Full multi-platform export (iOS Swift, Android XML + Compose, React Native, flat CSS, typed TS) is wired through [Style Dictionary](https://amzn.github.io/style-dictionary/). The config and template live in the `aurora-scale` skill — run when you need native outputs:
-
-```bash
-cd my-app
-npm install --save-dev style-dictionary
-# copy style-dictionary.config.mjs from the skill templates
-npm run tokens:build
+```tsx
+<body className="theme-white">…</body>
+// or scope:
+<section className="theme-white">…</section>
 ```
 
-Generated outputs land in `my-app/dist/` for each platform.
+Brand colors, gradient, typography, spacing, aurora-bg blobs preserved in both. Only surfaces / text / overlays / shadows / CTA-primary flip.
+
+## Enforcement
+
+`.aurora-cta` forces uppercase + tracking + font-weight at the CSS layer — agents can't forget them by composing bespoke Tailwind. `npm run aurora:check` backstops the CSS with a lint over `components/` and `App.tsx`.
 
 ## Principles
 
-1. **One source of truth.** Everything derives from `design-tokens/aurora.tokens.json`.
-2. **Three-tier tokens.** Primitive → Semantic → Component. Components consume semantic names; semantics alias primitives.
-3. **Non-destructive.** Hex values never change silently. CI blocks drift.
-4. **AI-first.** Every token and component has agent-readable intent docs.
+1. **One source of truth.** Everything derives from `design-tokens/aurora.tokens.json` (mirrored to CSS custom properties).
+2. **Three-tier tokens.** Primitive (`color.curefit.*`) → Semantic (`color.surface.*`, `color.text.*`) → Component (`cta.*`, `card.*`). Components consume utility classes or semantics, never primitives.
+3. **Non-destructive.** Existing token values don't change silently. The linter gates violations.
+4. **AI-first.** Every token has agent-readable intent docs + a machine-readable policy.
 
 ## License
 

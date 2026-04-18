@@ -1,0 +1,67 @@
+/* ============================================================
+   Aurora — SEMANTIC tokens (Tier 2)
+   Role-based aliases. Components consume THESE (not primitives).
+   ============================================================ */
+@theme {
+  /* --- Surfaces ---
+     Cards are 10% translucent white + 30px backdrop-blur by default
+     (Aurora "glass card" — matches Plan Card spec from Figma).
+     Use --color-bg-card-solid if you need an opaque card.
+  */
+  --color-bg-dark: #1A1A1A;                      /* app / page */
+  --color-bg-card: rgba(255, 255, 255, 0.10);    /* default: glass card */
+  --color-bg-card-solid: #1C1C1E;                /* opaque fallback */
+  --color-bg-elevated: #2C2C2C;                  /* sheets / modals */
+  --color-bg-surface: #232323;                   /* secondary surface */
+  --card-backdrop-blur: 30px;                    /* paired w/ bg-card */
+
+  /* --- Text --- */
+  --color-text-white: #FFFFFF;                   /* primary on dark */
+  --color-text-dark: #313028;                    /* primary on light */
+  --color-text-1: #FFFFFF;                       /* alias */
+  --color-text-2: #999CA0;                       /* muted (Trunks) */
+  --color-text-disabled: rgba(255, 255, 255, 0.10);
+
+  /* --- Semantic roles --- */
+  --color-scrim: rgba(0, 0, 0, 0.60);            /* modal backdrop */
+  --color-overlay: rgba(0, 0, 0, 0.40);          /* image overlay */
+  --color-divider: rgba(255, 255, 255, 0.10);    /* hairline on dark */
+  --color-divider-light: rgba(0, 0, 0, 0.08);    /* hairline on light */
+  --color-focus-ring: #00BEFF;
+
+  /* --- Interactive states --- */
+  --state-disabled-opacity: 0.40;
+  --state-disabled-bg: rgba(255, 255, 255, 0.10);
+  --state-selected-bg: rgba(245, 188, 0, 0.12);
+  --state-pressed-bg: rgba(255, 255, 255, 0.08);
+  --state-hover-bg: rgba(255, 255, 255, 0.04);
+
+  /* --- Shadows --- */
+  --shadow-subtle: 0px 2px 6px rgba(0, 0, 0, 0.07);
+  --shadow-low: 0px 4px 11px rgba(0, 0, 0, 0.15);
+  --shadow-medium: 0px 4px 14px rgba(0, 0, 0, 0.25);
+  --shadow-high: 0px 13px 24px rgba(0, 0, 0, 0.22);
+  --shadow-floating: 0px 4px 25px rgba(0, 0, 0, 0.15);
+  --shadow-modal: 0px 14px 24px 3px rgba(0, 0, 0, 0.25);
+  --shadow-divider: 0px 1px 0px rgba(0, 0, 0, 0.30);
+  --shadow-focus: 0 0 0 3px rgba(0, 190, 255, 0.40);
+
+  /* --- Elevation pairs (surface + shadow) --- */
+  --elevation-0-bg: var(--color-bg-dark);
+  --elevation-1-bg: var(--color-bg-card);
+  --elevation-1-shadow: var(--shadow-subtle);
+  --elevation-2-bg: var(--color-bg-elevated);
+  --elevation-2-shadow: var(--shadow-low);
+  --elevation-3-bg: var(--color-bg-elevated);
+  --elevation-3-shadow: var(--shadow-medium);
+  --elevation-4-bg: var(--color-bg-elevated);
+  --elevation-4-shadow: var(--shadow-high);
+  --elevation-modal-bg: var(--color-bg-elevated);
+  --elevation-modal-shadow: var(--shadow-modal);
+
+  /* --- Gradients --- */
+  --gradient-aurora-sky: linear-gradient(225deg, #F5BC00 0%, #00BEFF 100%);
+  --gradient-yellow-pink: linear-gradient(135deg, #F5BC00 0%, #FF3278 100%);
+  --gradient-fading-stroke: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+  --gradient-scrim-bottom: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+}
