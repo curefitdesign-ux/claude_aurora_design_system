@@ -37,8 +37,10 @@ html.theme-white {
   --state-hover-bg: rgba(0, 0, 0, 0.04);
   --state-selected-bg: rgba(245, 188, 0, 0.16);
 
-  /* --- Aurora blob opacity dialed down --- */
-  --aurora-bg-blob-opacity: 0.20;
+  /* --- Aurora blobs — more visible, larger, softer blur on white --- */
+  --aurora-bg-blob-opacity: 0.45;
+  --aurora-bg-blob-size: 55vw;
+  --aurora-bg-blob-blur: 220px;
 
   /* --- Shadows softened --- */
   --shadow-subtle: 0px 2px 6px rgba(0, 0, 0, 0.06);

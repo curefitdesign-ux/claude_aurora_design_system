@@ -7,7 +7,7 @@
    - 4 levels only: primary / secondary / tertiary / twins
    - Typography: Inter 700, 14px (lg) / 12px (sm),
      letter-spacing 0.5px, text-transform UPPERCASE
-   - Primary (dark theme): white bg, gradient text (yellow→pink)
+   - Primary (dark theme): white bg, solid pink text (#FF3278)
    - Primary (white theme): gradient bg, white text
    - Secondary: glass (10% white / 30px blur), white text
    - Tertiary: transparent + white text, 50px blur optional
@@ -31,8 +31,11 @@
   --cta-letter-spacing-sm: 0.5px;
   --cta-text-transform: uppercase;
 
-  /* --- Primary --- */
+  /* --- Primary ---
+     Dark theme: white bg + solid pink text (#FF3278 = curefit-pink).
+     White theme: gradient bg + white text (see themes/white.css). */
   --cta-primary-bg: #FFFFFF;
+  --cta-primary-text: #FF3278;
   --cta-primary-text-gradient: var(--cta-gradient);
   --cta-primary-backdrop-blur: 27px;
   --cta-primary-radius: 5px;
@@ -143,20 +146,16 @@
   letter-spacing: var(--cta-letter-spacing-sm);
 }
 
-/* --- Primary (dark theme default — white bg, gradient text) --- */
+/* --- Primary (dark theme default — white bg, solid pink text) --- */
 .aurora-cta--primary {
   background-color: var(--cta-primary-bg);
-  color: transparent;
-  background-image: var(--cta-primary-text-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
+  background-image: none;
+  color: var(--cta-primary-text);
   height: var(--cta-primary-height-lg);
   padding: var(--cta-primary-padding-y-lg) var(--cta-primary-padding-x-lg);
   min-width: 120px;
   max-width: var(--cta-primary-max-width);
   border-radius: var(--cta-primary-radius);
-  /* The bg-color fill below is a second layer — Safari needs both */
-  background-origin: padding-box, border-box;
 }
 /* When .theme-white is active, primary flips to gradient bg + white text */
 .theme-white .aurora-cta--primary,
@@ -176,8 +175,6 @@ body.theme-white .aurora-cta--primary {
   background-image: none;
   background-color: var(--cta-primary-disabled-bg);
   color: var(--cta-primary-disabled-text);
-  -webkit-background-clip: border-box;
-  background-clip: border-box;
 }
 
 /* --- Secondary (glass) --- */
