@@ -8,13 +8,46 @@
 .theme-white body,
 body.theme-white,
 html.theme-white {
-  /* --- Surfaces --- */
-  --color-bg-dark: #FAFAFA;
-  --color-bg-card: rgba(255, 255, 255, 0.60);
+  /* --- Surfaces ---
+     Warmer, slightly cooler-than-paper background so cards "float".
+     Card glass is a high-opacity frosted white with a faint pink wash
+     so it reads as a smart surface on top of the aurora blobs. */
+  --color-bg-dark: #F7F6FA;
+  --color-bg-card: rgba(255, 255, 255, 0.55);
   --color-bg-card-solid: #FFFFFF;
   --color-bg-elevated: #FFFFFF;
-  --color-bg-surface: #F4F4F4;
-  --card-backdrop-blur: 30px;
+  --color-bg-surface: #F1EEF6;
+  --card-backdrop-blur: 40px;
+
+  /* Smart light-theme app background — a soft radial mesh behind the
+     aurora blobs. Gives depth without being loud. */
+  --bg-app-gradient: radial-gradient(
+      130% 85% at 0% 0%,
+      rgba(255, 50, 120, 0.10) 0%,
+      rgba(255, 50, 120, 0) 55%
+    ),
+    radial-gradient(
+      120% 90% at 100% 100%,
+      rgba(0, 190, 255, 0.10) 0%,
+      rgba(0, 190, 255, 0) 55%
+    ),
+    radial-gradient(
+      100% 70% at 50% 50%,
+      rgba(245, 188, 0, 0.06) 0%,
+      rgba(245, 188, 0, 0) 70%
+    ),
+    #F7F6FA;
+
+  /* Reflective border: on white cards, white alphas vanish. Use a
+     directional mix of white highlight + soft ink hairline so the
+     bevel still reads. */
+  --card-reflect-border: linear-gradient(
+    224deg,
+    rgba(255, 255, 255, 0.90) 0%,
+    rgba(255, 255, 255, 0.20) 35%,
+    rgba(0, 0, 0, 0.06) 70%,
+    rgba(0, 0, 0, 0.12) 100%
+  );
 
   /* --- Text (white → ink) --- */
   --color-text-white: #1C1C1E;

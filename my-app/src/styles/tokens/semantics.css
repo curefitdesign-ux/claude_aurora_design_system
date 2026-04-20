@@ -64,4 +64,24 @@
   --gradient-yellow-pink: linear-gradient(135deg, #F5BC00 0%, #FF3278 100%);
   --gradient-fading-stroke: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
   --gradient-scrim-bottom: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 100%);
+
+  /* --- Reflective border (Figma fill_ZIL9CT — Plan Card stroke) ---
+     Directional glass highlight, brightest top-left. Used on .aurora-card. */
+  --card-reflect-border: linear-gradient(
+    224deg,
+    rgba(255, 255, 255, 0.66) 0%,
+    rgba(255, 255, 255, 0.05) 55%,
+    rgba(255, 255, 255, 0.31) 100%
+  );
+  --card-reflect-border-width: 1px;
+
+  /* --- App background (dark default) ---
+     A soft radial tint under the aurora blobs, so cards read cleanly
+     against more than a flat color. */
+  --bg-app-gradient: radial-gradient(
+    120% 80% at 50% 0%,
+    rgba(255, 50, 120, 0.08) 0%,
+    rgba(0, 190, 255, 0.05) 40%,
+    rgba(26, 26, 26, 0) 70%
+  ), var(--color-bg-dark);
 }

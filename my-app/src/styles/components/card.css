@@ -1,19 +1,43 @@
 /* ============================================================
    Aurora — Card component
-   Default surface: 10% white translucent + 30px backdrop blur.
-   Matches Plan Card spec from Figma Aurora App DS.
+   Default surface: 10% translucent white + 30px backdrop blur.
+   Reflective 1px gradient border (Figma "Plan Card" stroke).
+   Matches Aurora App DS.
    ============================================================ */
 .aurora-card {
+  position: relative;
   background-color: var(--color-bg-card);
   backdrop-filter: blur(var(--card-backdrop-blur));
   -webkit-backdrop-filter: blur(var(--card-backdrop-blur));
   border-radius: var(--radius-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* no solid border — the reflective gradient is painted by ::before */
+  border: 0;
+  isolation: isolate;
 }
 
-.theme-white .aurora-card,
-body.theme-white .aurora-card {
-  border-color: rgba(0, 0, 0, 0.06);
+/* Reflective gradient border — rendered via masked pseudo-element
+   so the card interior stays translucent (backdrop-filter intact). */
+.aurora-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: var(--card-reflect-border-width);
+  background: var(--card-reflect-border);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Light theme: border gradient uses tinted black highlights instead
+   of bright white — still reflective, reads correctly on warm surface. */
+.theme-white .aurora-card::before,
+body.theme-white .aurora-card::before {
+  background: var(--card-reflect-border);
 }
 
 /* Legacy ergonomics: any element using bg-bg-card also gets the blur,
