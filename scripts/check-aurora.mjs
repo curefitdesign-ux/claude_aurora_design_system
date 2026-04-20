@@ -110,6 +110,39 @@ for (const file of files) {
       // textTransform overrides on CTAs
       if (/textTransform\s*:\s*['"]none['"]/.test(ln))
         push(file, line, "CTA_CASE_OVERRIDE", "textTransform:'none' breaks the UPPERCASE rule");
+      // text-transform: none in CSS
+      if (isCss && /text-transform\s*:\s*none/.test(ln))
+        push(file, line, "CTA_CASE_OVERRIDE", "text-transform:none breaks the UPPERCASE rule");
+    }
+
+    // Raw radius values — must match the radius scale
+    if (!hasHexAllow && policy.radius?.scale_px) {
+      const scale = new Set(policy.radius.scale_px);
+      // rounded-[12px], border-radius: 12px, borderRadius: '12px'
+      const radiusMatches = [
+        ...ln.matchAll(/rounded-\[(\d+(?:\.\d+)?)px\]/g),
+        ...ln.matchAll(/border-radius\s*:\s*(\d+(?:\.\d+)?)px/g),
+        ...ln.matchAll(/borderRadius\s*:\s*['"]?(\d+(?:\.\d+)?)px/g),
+      ];
+      for (const m of radiusMatches) {
+        const px = parseFloat(m[1]);
+        if (!scale.has(px) && !scale.has(Math.round(px))) {
+          push(file, line, "RADIUS_OFF_SCALE", `${px}px radius is not on the Aurora scale — use a --radius-* token`);
+        }
+      }
+    }
+
+    // <button> must carry .aurora-cta (enforces UPPERCASE + spec at the root)
+    if (isComponent && /<button\b/.test(ln)) {
+      // Peek the next ~5 lines for className content (multi-line JSX attrs)
+      const window = src.split("\n").slice(i, i + 6).join(" ");
+      const classMatch = window.match(/className\s*=\s*[{"'`]([^"'`}]*)/);
+      const classes = classMatch ? classMatch[1] : "";
+      const hasAurora = /\baurora-cta\b/.test(classes);
+      const hasAllowHatch = /\/\/\s*ok:button/.test(ln) || /\/\*\s*ok:button\s*\*\//.test(ln);
+      if (!hasAurora && !hasAllowHatch) {
+        push(file, line, "CTA_MISSING_CLASS", "<button> must use .aurora-cta (+ --primary/--secondary/--tertiary). // ok:button to override");
+      }
     }
 
     // Card-bg pattern words

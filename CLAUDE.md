@@ -118,6 +118,8 @@ When asked to implement a Figma design:
 - Decorative handwriting for numeric values (e.g. `$707` in a cursive purple)
 - `textTransform: 'none'` on a CTA (breaks the UPPERCASE rule)
 - `bg-curefit-*` on a `<button>`
+- `<button>` without `.aurora-cta` class — linter flags `CTA_MISSING_CLASS`
+- Off-scale radius (`rounded-[13px]`, `borderRadius: "7px"`, etc.) — linter flags `RADIUS_OFF_SCALE`. The Aurora radius scale is **4, 5, 8, 10, 12, 15, 16, 20, 30, 40, 50, 100, 1000**. Use `--radius-*` tokens, never raw px outside the scale.
 
 If a prompt asks for "this card" referring to a cream+purple design, **decline** and rebuild with:
 - `.aurora-card` glass surface (10% / 60% white + 30px blur)

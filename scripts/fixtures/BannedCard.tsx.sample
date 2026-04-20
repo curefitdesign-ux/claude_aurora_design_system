@@ -13,6 +13,8 @@ export function BannedCard() {
       <span style={{ color: "rgb(127, 91, 255)", fontFamily: "Handlee" }}>$707</span>
       <button className="bg-curefit-yellow">book now</button>
       <button style={{ textTransform: "none" }}>BROKEN</button>
+      <button className="rounded-[13px]">off-scale radius</button>
+      <div style={{ borderRadius: "7px" }}>off-scale radius 2</div>
     </div>
   );
 }

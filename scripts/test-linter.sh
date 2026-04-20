@@ -14,4 +14,13 @@ if node scripts/check-aurora.mjs >/tmp/aurora-lint-out 2>&1; then
   exit 1
 fi
 echo "✓ linter correctly rejected banned card fixture"
-grep -E 'FORBIDDEN_HEX|FORBIDDEN_FONT|RAW_HEX|CARD_FORBIDDEN_BG|CTA_BRAND_BG|CTA_CASE_OVERRIDE|FORBIDDEN_RGB' /tmp/aurora-lint-out | head -15
+grep -E 'FORBIDDEN_HEX|FORBIDDEN_FONT|RAW_HEX|CARD_FORBIDDEN_BG|CTA_BRAND_BG|CTA_CASE_OVERRIDE|FORBIDDEN_RGB|RADIUS_OFF_SCALE|CTA_MISSING_CLASS' /tmp/aurora-lint-out | head -25
+
+# Assert new rules fired too
+for code in CTA_MISSING_CLASS RADIUS_OFF_SCALE; do
+  if ! grep -q "$code" /tmp/aurora-lint-out; then
+    echo "✗ linter did NOT catch $code"
+    exit 1
+  fi
+done
+echo "✓ all enforcement codes fired"

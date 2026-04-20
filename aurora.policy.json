@@ -67,6 +67,7 @@
     "letter_spacing_px": 0.5,
     "font_weight": 700,
     "font_family": "Inter",
+    "required_utility_class": "aurora-cta",
     "allowed_utility_classes": [
       "aurora-cta",
       "aurora-cta--primary",
@@ -80,7 +81,17 @@
       "color-curefit-blue",
       "color-curefit-green",
       "color-curefit-pink"
-    ]
+    ],
+    "specs": {
+      "primary":   { "radius_px": 5, "height_lg_px": 50, "height_sm_px": 40, "min_width_px": 120, "max_width_px": 335 },
+      "secondary": { "radius_px": 5, "height_lg_px": 40, "height_sm_px": 30, "min_width_px": 120 },
+      "tertiary":  { "radius_px": 5, "height_lg_px": 40, "height_sm_px": 30 }
+    }
+  },
+
+  "radius": {
+    "scale_px": [0, 1, 4, 5, 8, 10, 12, 15, 16, 20, 30, 40, 50, 100, 1000],
+    "note": "Radius values in code must match this scale — use the --radius-* tokens. 0 and 1 are allowed for hairlines."
   },
 
   "card": {
