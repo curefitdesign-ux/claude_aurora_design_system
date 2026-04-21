@@ -138,7 +138,7 @@ export function Foundations() {
                       letterSpacing: caps ? "0.5px" : undefined,
                     }}
                   >
-                    {name === "CTA" ? "Book a class" : "Aurora type scale"}
+                    {name === "CTA" ? "Primary action" : "Aurora type scale"}
                   </div>
                   <div className="shrink-0 text-right">
                     <div className="text-[14px] font-bold">{name}</div>

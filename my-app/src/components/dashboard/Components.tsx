@@ -18,7 +18,7 @@ export function Components() {
           <Card>
             <Label>Primary · Large (50px)</Label>
             <div className="mt-3 flex flex-wrap gap-3">
-              <button className="aurora-cta aurora-cta--primary">Book a class</button>
+              <button className="aurora-cta aurora-cta--primary">Primary action</button>
               <button className="aurora-cta aurora-cta--primary" disabled>Disabled</button>
             </div>
           </Card>
@@ -26,18 +26,18 @@ export function Components() {
           <Card className="mt-3">
             <Label>Primary · Small (40px)</Label>
             <div className="mt-3 flex flex-wrap gap-3">
-              <button className="aurora-cta aurora-cta--primary aurora-cta--sm">Book</button>
+              <button className="aurora-cta aurora-cta--primary aurora-cta--sm">Confirm</button>
             </div>
           </Card>
 
           <Card className="mt-3">
             <Label>Secondary · Glass</Label>
             <div className="mt-3 flex flex-wrap gap-3">
-              <button className="aurora-cta aurora-cta--secondary">Waitlist</button>
-              <button className="aurora-cta aurora-cta--secondary is-booked">Booked</button>
-              <button className="aurora-cta aurora-cta--secondary is-waitlist">Waitlisted</button>
-              <button className="aurora-cta aurora-cta--secondary is-full">Full</button>
-              <button className="aurora-cta aurora-cta--secondary is-negative">Cancel</button>
+              <button className="aurora-cta aurora-cta--secondary">Secondary</button>
+              <button className="aurora-cta aurora-cta--secondary is-booked">Success state</button>
+              <button className="aurora-cta aurora-cta--secondary is-waitlist">Pending state</button>
+              <button className="aurora-cta aurora-cta--secondary is-full">Unavailable</button>
+              <button className="aurora-cta aurora-cta--secondary is-negative">Destructive</button>
               <button className="aurora-cta aurora-cta--secondary" disabled>Disabled</button>
             </div>
           </Card>
@@ -45,14 +45,14 @@ export function Components() {
           <Card className="mt-3">
             <Label>Tertiary</Label>
             <div className="mt-3 flex flex-wrap gap-3">
-              <button className="aurora-cta aurora-cta--tertiary">Learn more</button>
+              <button className="aurora-cta aurora-cta--tertiary">Tertiary</button>
               <button className="aurora-cta aurora-cta--tertiary aurora-cta--sm">Details</button>
               <button className="aurora-cta aurora-cta--tertiary" disabled>Disabled</button>
             </div>
           </Card>
 
           <Card className="mt-3">
-            <Label>Twins · Two-CTA row</Label>
+            <Label>Twins · Two-CTA row (required for side-by-side CTAs)</Label>
             <div className="mt-3 aurora-cta-twins">
               <button className="aurora-cta aurora-cta--secondary">Cancel</button>
               <button className="aurora-cta aurora-cta--primary">Confirm</button>
@@ -64,15 +64,15 @@ export function Components() {
         <SubSection title="Surface · Card" note=".aurora-card · 10%/60% white · 30–40px blur · reflective border">
           <Grid cols={2}>
             <Card>
-              <Label>Plan Card · from Figma Plan Card</Label>
+              <Label>Media + Title Card</Label>
               <div className="mt-3 flex items-center gap-4">
                 <div className="flex h-16 w-16 flex-col items-center justify-center rounded-[var(--radius-card)] bg-[var(--gradient-yellow-pink)]">
-                  <div className="text-[20px] font-black leading-none">12</div>
-                  <div className="mt-1 text-[9px] font-bold uppercase tracking-[1px]">Months</div>
+                  <div className="text-[20px] font-black leading-none">A</div>
+                  <div className="mt-1 text-[9px] font-bold uppercase tracking-[1px]">Label</div>
                 </div>
                 <div className="min-w-0">
-                  <div className="truncate text-[16px] font-bold">Annual Plan</div>
-                  <div className="text-[14px] text-[color:var(--color-text-2)]">₹1000/mo</div>
+                  <div className="truncate text-[16px] font-bold">Card title</div>
+                  <div className="text-[14px] text-[color:var(--color-text-2)]">Secondary line</div>
                 </div>
               </div>
             </Card>
@@ -80,9 +80,9 @@ export function Components() {
             <Card>
               <Label>Stat Card</Label>
               <div className="mt-3">
-                <div className="text-[38px] font-black leading-none">504</div>
+                <div className="text-[38px] font-black leading-none">128</div>
                 <div className="mt-1 text-[12px] font-bold uppercase tracking-[1px] text-[color:var(--color-text-2)]">
-                  Days · On streak
+                  Metric label
                 </div>
               </div>
             </Card>
@@ -93,7 +93,7 @@ export function Components() {
         <SubSection title="Chip" note="--radius-chip (15px) · P8 12px medium">
           <Card>
             <div className="flex flex-wrap gap-2">
-              {["Strength", "Cardio", "Yoga", "HRX", "Dance", "Boxing"].map((c, i) => (
+              {["Option A", "Option B", "Option C", "Option D", "Option E", "Option F"].map((c, i) => (
                 <span
                   key={c}
                   className="rounded-[var(--radius-chip)] px-3 py-1.5 text-[12px] font-medium"
@@ -117,8 +117,8 @@ export function Components() {
               <Tag color="var(--color-status-negative)">Expired</Tag>
               <Tag color="var(--color-status-alert)">Alert</Tag>
               <Tag color="var(--color-status-neutral)">Info</Tag>
-              <Tag color="var(--color-curefit-pink)">Pro</Tag>
-              <Tag color="var(--color-curefit-yellow)">Save ₹500</Tag>
+              <Tag color="var(--color-curefit-pink)">Featured</Tag>
+              <Tag color="var(--color-curefit-yellow)">Promo</Tag>
             </div>
           </Card>
         </SubSection>
@@ -130,7 +130,7 @@ export function Components() {
               <Label>Text field</Label>
               <input
                 type="text"
-                placeholder="Your name"
+                placeholder="Placeholder text"
                 className="mt-3 w-full rounded-[var(--radius-2xs)] bg-[color:var(--color-white-10)] px-4 py-3 text-[16px] outline-none focus-visible:shadow-[var(--shadow-focus)]"
                 style={{ color: "var(--color-text-white)" }}
               />
@@ -141,7 +141,7 @@ export function Components() {
                 <span aria-hidden className="text-[color:var(--color-text-2)]">⌕</span>
                 <input
                   type="text"
-                  placeholder="Search classes"
+                  placeholder="Search"
                   className="w-full bg-transparent text-[14px] outline-none"
                   style={{ color: "var(--color-text-white)" }}
                 />
@@ -207,7 +207,7 @@ export function Components() {
               >
                 ✓
               </div>
-              <div className="text-[14px]">Class booked for tomorrow · 7:00 AM</div>
+              <div className="text-[14px]">Action completed successfully</div>
             </div>
           </Card>
         </SubSection>
