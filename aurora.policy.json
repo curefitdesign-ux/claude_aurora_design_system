@@ -112,6 +112,8 @@
   "rules": [
     "Components must not embed raw hex; use var(--color-*) or var(--cta-*) tokens.",
     "CTAs must render their label via .aurora-cta utility (text-transform:uppercase baked in) — no <button class=\"bg-curefit-yellow\">.",
+    "CTAs placed side-by-side must be wrapped in .aurora-cta-twins (equal-width, 50px row). Mixing a standalone 50px Primary with a standalone 40px Secondary is not allowed.",
+    "The DS repo ships tokens + primitives only. No feature-screen components (game UIs, specific pages, marketing illustrations) — those belong to the product app consuming the DS.",
     "No spacing off the 5px rhythm. No px radius outside the radius scale.",
     "Motion uses --duration-* + --easing-* tokens.",
     "Fonts limited to allowed_fonts; forbidden_fonts must not appear in imports, fontFamily, or className.",

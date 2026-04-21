@@ -126,6 +126,10 @@
   border: 0;
   white-space: nowrap;
   user-select: none;
+  box-sizing: border-box;
+  /* Lock size — parent flex/grid cannot stretch or compress a CTA. */
+  flex: 0 0 auto;
+  align-self: center;
   transition:
     background-color var(--duration-normal) var(--easing-default),
     color var(--duration-normal) var(--easing-default),

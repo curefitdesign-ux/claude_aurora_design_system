@@ -57,6 +57,23 @@ The four levels — `primary`, `secondary`, `tertiary`, `twins` — are in `styl
 
 Forbidden on buttons: `bg-curefit-yellow`, `bg-curefit-blue`, `bg-curefit-green`, `bg-curefit-pink`.
 
+**Pairs MUST use `.aurora-cta-twins`.** Standalone Primary is 50px; standalone Secondary is 40px — that's the Figma spec. Putting them side-by-side produces a visibly inconsistent row. Always wrap:
+```tsx
+// ✅
+<div className="aurora-cta-twins">
+  <button className="aurora-cta aurora-cta--secondary">cancel</button>
+  <button className="aurora-cta aurora-cta--primary">confirm</button>
+</div>
+
+// ❌  (mismatched heights, stretched by parent flex)
+<div className="flex gap-3">
+  <button className="aurora-cta aurora-cta--secondary">view plan</button>
+  <button className="aurora-cta aurora-cta--primary">start workout</button>
+</div>
+```
+
+The `.aurora-cta` base now carries `flex: 0 0 auto; align-self: center` — parents cannot stretch or compress CTAs. If you need them to share a row, use `.aurora-cta-twins`.
+
 ### 3. Fonts: Aurora stack only
 Allowed: **Inter** (primary), **Bw Modelica SS01** (display), **Roboto Mono** (data), **Bebas Neue** (accent).
 Forbidden: Caveat, Handlee, BenchNine, Helvetica Neue, Segoe Script, Comic Sans, Arial Narrow.
