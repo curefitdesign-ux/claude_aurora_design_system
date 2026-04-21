@@ -98,14 +98,10 @@
 
   "font": {
     "family": {
-      "primary":      { "$value": "Inter, 'Helvetica Neue', Arial, sans-serif", "$type": "fontFamily" },
-      "display":      { "$value": "'Bw Modelica SS01', Inter, sans-serif", "$type": "fontFamily" },
-      "mono":         { "$value": "'Roboto Mono', monospace", "$type": "fontFamily" },
-      "bebas":        { "$value": "'Bebas Neue', sans-serif", "$type": "fontFamily" },
-      "heading":      { "$value": "'Helvetica Neue', Helvetica, Arial, sans-serif", "$type": "fontFamily" },
-      "handwritten":  { "$value": "Caveat, 'Segoe Script', cursive", "$type": "fontFamily" },
-      "handlee":      { "$value": "Handlee, Caveat, cursive", "$type": "fontFamily" },
-      "label":        { "$value": "BenchNine, 'Arial Narrow', sans-serif", "$type": "fontFamily" }
+      "primary": { "$value": "Inter, system-ui, sans-serif", "$type": "fontFamily" },
+      "display": { "$value": "'Bw Modelica SS01', Inter, sans-serif", "$type": "fontFamily" },
+      "mono":    { "$value": "'Roboto Mono', monospace", "$type": "fontFamily" },
+      "bebas":   { "$value": "'Bebas Neue', sans-serif", "$type": "fontFamily" }
     }
   },
 
