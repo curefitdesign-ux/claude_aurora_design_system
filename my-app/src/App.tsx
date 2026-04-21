@@ -1,16 +1,13 @@
-import { NinjaJourney } from "./components/NinjaJourney";
+import { Dashboard } from "./components/dashboard/Dashboard";
 
 /**
- * Reference app for the Aurora design system.
- * Only renders components that comply with the Aurora token contract.
- * Off-brand demos are excluded — see aurora.policy.json for banned patterns.
+ * Aurora Design System — reference dashboard.
+ * Structured gallery of every token and component in the system,
+ * with a dark/light theme toggle. Source of truth: styles/tokens/* +
+ * styles/components/*.
  */
 function App() {
-  return (
-    <div className="flex flex-col items-center">
-      <NinjaJourney />
-    </div>
-  );
+  return <Dashboard />;
 }
 
 export default App;

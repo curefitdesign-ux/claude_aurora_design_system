@@ -35,9 +35,6 @@
    ============================================================ */
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  justify-content: center;
   min-height: 100vh;
   background: var(--bg-app-gradient);
   font-family: var(--font-primary);
@@ -47,11 +44,7 @@ body {
 }
 
 #root {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  padding: 0;
   position: relative;
   z-index: 1;
 }
